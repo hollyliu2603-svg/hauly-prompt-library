@@ -8,7 +8,7 @@ Module 1, Topic 3 (La Trobe University, 2026) describes treating each prompt "as
 2. **Test it** on a sample input written to reflect real Hauly features.
 3. **Find what went wrong** in the output.
 4. **Fix the prompt (v2)** and test it on the *same* input, so the two outputs can be compared fairly.
-5. **Repeat (v3)** where v2 still fell short — this happened for Prompts 1, 2 and 6.
+5. **Repeat (v3, v4)** where the new version still fell short — Prompts 1 and 2 reached v4, and Prompts 6 and 7 reached v3.
 
 All tests were run in September 2026 using Claude Sonnet 5, with no other instructions added. Each version was run once. Because AI outputs vary from run to run, one run shows what the prompt *can* produce, not what it will produce every time.
 
@@ -20,15 +20,15 @@ The two comparisons below show the process in the most detail.
 
 **Sample input:** *"The app keeps crashing when I try to add a new product to my Haul. This is so annoying, I've lost half my collection I already typed in!"*
 
-| Criterion | v1 | v2 | v3 (final) |
-| --- | --- | --- | --- |
-| Length (limit: under 80 words) | 231 words | 71 words | 66 words |
-| Specific to the user's problem | Partly | Yes | Yes |
-| Over-apologising | Several apologies | Opened with "I'm so sorry" | No apology — thanked the user |
-| Invented details | "flag this to our team" | "Our team is digging into" it; a workaround that "seems to help" | None |
-| Clear next step | Several generic tips | An unconfirmed workaround | Asked for phone model and app version |
+| Criterion | V1 | V2 | V3 | V4 (final) |
+| --- | --- | --- | --- | --- |
+| Length (limit: under 80 words) | 231 words | 71 words | 66 words | Under 80 words |
+| Specific to the user's problem | Partly | Yes | Yes — mentions lost work | Less specific — "how frustrating that must be" |
+| Invented details | "flag this to our team" | "Our team is digging into" it; a workaround that "seems to help" | None | None |
+| Clear next step | Several generic tips | An unconfirmed workaround | Asked for phone model and app version | Asked for device and app version |
+| Internal review note | No | No | No | Yes — "Review: YES" with reasons from the triage record |
 
-**v3 output (in full):**
+**V3 output (in full):**
 
 > Hi there,
 >
@@ -40,7 +40,13 @@ The two comparisons below show the process in the most detail.
 >
 > Holly
 
-**What this shows:** adding a Role, voice rules and a word limit (v2) fixed the length and made the reply specific, but the AI still made up facts to sound helpful. Only an explicit "use only the facts given" rule (v3) stopped that. For a solo founder, an invented "team" or a fix that doesn't work would damage trust with users.
+**V4 output (in full):**
+
+> Reply: Thanks for flagging this — I can see how frustrating that must be. I'm looking into the crashing issue with adding new products to Haul. Could you tell me what device and app version you're using? That will help me dig into what's happening. — Holly
+>
+> Review: YES — multiple issues reported (crash + lost data) and message mentions lost data, with no confirmed workaround or data recovery.
+
+**What this shows:** adding a Role, voice rules and a word limit (V2) fixed the length, but the AI still made up facts to sound helpful; an explicit "use only the facts given" rule (V3) stopped that. V4 connected Prompt 2 to Prompt 1 — the triage record became the input — and added two few-shot examples. The examples produced the exact Reply/Review pattern and an accurate internal review note, which makes the output easier to route automatically. But the reply no longer mentioned the lost collection, so the examples improved the format more than the quality of the reply. V4 also added the triage record and approved facts to the input, so it is not a pure same-input comparison with V1–V3.
 
 ## Example 2 — Prompt 6: Trend Analysis and Gazette Planning
 

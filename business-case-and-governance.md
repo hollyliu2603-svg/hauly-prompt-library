@@ -13,6 +13,7 @@ A library of ten tested prompts, one for each repeating job (see the [workflow t
 - produces the same structure every time, so results can be compared and tracked
 - has Hauly's real rules built in — no prices or shopping features, @usernames only, "lookalike" not "dupe", and Hauly's own ingredient pairing list
 - says clearly what the AI must **not** do (guess causes, invent facts, remove posts, publish content)
+- connects to the next step: structured outputs (for example Prompt 1's triage record) can be passed straight into another prompt (Prompt 2), which is where most of the automation potential comes from
 
 The prompts **support** Holly rather than replace judgement. As Module 1, Topic 3 puts it, workflow automation "is not about replacing humans but about augmenting human performance".
 
@@ -47,7 +48,7 @@ The prompts **support** Holly rather than replace judgement. As Module 1, Topic 
 | Moderation fairness | How often Holly overrules a Prompt 7 recommendation | Shows over- or under-flagging |
 | Customer experience | Time from a support message arriving to a reply being sent | Shows the benefit to users |
 
-**Evidence from testing so far:** in nine of the ten prompts, the final version followed its rules more closely than the first version (in Prompt 9 there was no visible difference) — for example, Prompt 2's reply fell from 231 to 66 words with no invented details, and Prompt 5 correctly flagged a request that conflicts with Hauly's no-prices principle, which the first version had scored 4/5 for value. These are single test runs, not measured business results.
+**Evidence from testing so far:** in nine of the ten prompts, the final version followed its rules more closely than the first version (in Prompt 9 there was no visible difference) — for example, Prompt 2's reply fell from 231 words with an invented team to under 80 words with no invented details, and Prompt 5 correctly flagged a request that conflicts with Hauly's no-prices principle, which the first version had scored 4/5 for value. These are single test runs, not measured business results.
 
 ## 5. Risks and safeguards
 
