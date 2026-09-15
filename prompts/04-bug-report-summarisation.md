@@ -146,3 +146,132 @@ Scan Ingredients feature (accessed from a product within the Haul tab)
 ## Severity
 **Blocking** — The Scan Ingredients feature, a core function of the app, fails 100% of the time as described, with no apparent workaround mentioned by the user.
 ~~~
+
+## Prompt Lab check (GPT-4.1 mini)
+
+To check the results weren't specific to one AI model, the first and final versions were re-run in La Trobe Prompt Lab using GPT-4.1 mini, with exactly the same prompt text. Prompt Lab's prompt review scores the prompt itself out of 100.
+
+**What GPT-4.1 mini did:**
+
+| Version | Result | Compared with Claude Sonnet 5 |
+| --- | --- | --- |
+| V1 | Invented a cause: "performance issues when handling large data sets … possibly related to inefficient data fetching, parsing, or UI blocking on the main thread"; steps the user never described were not marked as guesses | Same problem |
+| V2 | No technical cause; one step marked "(inferred)"; but step 1 wasn't marked, the 200 products became a reproduction step, and missing iOS and app versions were left out instead of marked "not provided" | Weaker — Claude Sonnet 5 marked both assumed steps and listed missing details as "not provided" |
+
+- **Prompt Lab review:** V1 scored 79/100 and was marked down for encouraging "inference of a likely technical cause"; V2 scored 83.5/100.
+
+### Prompt Lab — V1
+
+**Recorded response (GPT-4.1 mini)**
+
+~~~text
+Steps to reproduce:  
+1. Open the Hauly app on an iPhone.  
+2. Navigate to the scan ingredients feature.  
+3. Attempt to scan the ingredients on any product.  
+
+Expected behaviour:  
+- The app scans the product ingredients and displays the relevant information without delay.  
+
+Actual behaviour:  
+- A spinning wheel appears indefinitely, then the app automatically returns to the haul tab without showing the scan results.  
+
+Device details:  
+- iPhone (specific model not provided)  
+- iOS version not specified  
+
+Affected tab/feature:  
+- Scan ingredients feature within the Hauly app  
+
+Likely technical cause:  
+- The scanning process may be timing out or failing due to performance issues when handling large data sets (user has ~200 products), possibly related to inefficient data fetching, parsing, or UI blocking on the main thread.  
+
+Severity: Functional  
+- The bug prevents the core scanning feature from working, significantly impacting user experience and app functionality.
+~~~
+
+*The first V1 run's response was cut off before the cause and severity sections, so the prompt was re-run in a new chat; the response above is the complete re-run. The review was recorded on the first run of the same prompt.*
+
+**Prompt Lab review:** overall score 79/100
+
+~~~text
+Rubric Scores
+* Clarity: 85/100 - The prompt is mostly clear but could better specify the format and detail level expected for each output section.
+* Constraints: 70/100 - The prompt sets some constraints but lacks explicit instructions on output format consistency and detail precision.
+* Structure: 75/100 - The prompt has a logical flow but could benefit from clearer separation and labeling of expected output components.
+* Verifiability: 80/100 - The prompt asks for verifiable details but does not explicitly require evidence or references to support the technical cause.
+* Hallucination Risk: 85/100 - The prompt encourages inference of a likely technical cause, which risks hallucination; more guidance or limiting speculation would reduce this risk.
+Overall score: 79/100
+Top Improvements
+* Clearly define the expected output format, including labels and numbering, to ensure consistent structure.
+* Limit or guide the inference of the technical cause to reduce hallucination risk, possibly by asking for only plausible causes based on given information.
+* Request explicit device details or note when information is missing to improve verifiability.
+~~~
+
+### Prompt Lab — V2
+
+**Recorded response (GPT-4.1 mini)**
+
+~~~text
+Steps to reproduce:
+1. Open the Hauly app on an iPhone.
+2. Navigate to the haul containing approximately 200 products. (inferred)
+3. Use the "scan ingredients" feature on a product.
+4. Observe the behavior after scanning.
+
+Expected behavior:
+- The app should successfully scan and display the ingredients of the product.
+
+Actual behavior:
+- The app shows a spinning wheel indefinitely, then returns to the haul without displaying the ingredients.
+
+Device details:
+- iPhone
+
+Affected tab/feature:
+- Scan ingredients feature
+
+Severity:
+- Functional; the feature does not work as intended, preventing users from scanning ingredients.
+~~~
+
+**Prompt Lab review:** overall score 83.5/100
+
+~~~text
+Rubric Scores
+Clarity: 85/100 - The prompt is mostly clear but could better specify the format and detail level expected in the output.
+Constraints: 80/100 - The prompt includes useful constraints (no guessing technical cause, mark inferred steps) but could explicitly limit verbosity or format.
+Structure: 75/100 - The prompt provides a good outline of expected output but could be more explicit about formatting (e.g., bullet vs numbered lists).
+Verifiability: 90/100 - The prompt encourages extracting only stated or inferred info, reducing unverifiable assumptions.
+Hallucination Risk: 90/100 - The prompt explicitly forbids guessing technical causes, lowering hallucination risk.
+Overall Score
+Overall score: 83.5/100
+
+Top Improvements
+Specify the exact output format (e.g., numbered steps, bullet points) to improve consistency.
+Clarify how to handle missing information beyond device details (e.g., severity reasoning).
+Add constraints on output length or style to avoid overly verbose or vague responses.
+Suggested Rewrite
+Role: You are converting raw user bug reports into a structured bug ticket for a solo developer.
+
+Action: Extract only the details needed to fix the bug from the user message. Do not guess or infer technical causes unless explicitly stated.
+
+Context: Hauly is an iPhone app.
+
+Message: "since the last update whenever i use scan ingredients on a product it just shows a spinning wheel forever then goes back to my haul. i have like 200 products in there. iphone"
+
+Expected output format:
+
+Steps to reproduce: Provide a numbered list of steps based on the user message. If a step is not explicitly stated, mark it as "(inferred)".
+Expected behavior: Describe what should happen.
+Actual behavior: Describe what happens instead.
+Device details: Include device info if mentioned; otherwise, write "not provided".
+Affected tab/feature: Identify the relevant app feature or tab.
+Severity: Choose one of cosmetic, functional, or blocking, and provide one sentence explaining your choice.
+Constraints:
+
+Do not guess technical causes.
+Keep the output concise and focused on actionable bug details.
+~~~
+
+**Possible next version:** the V2 review suggested specifying the exact output format and limiting length, which lines up with what GPT-4.1 mini got wrong. A V3 could list every field that must say "not provided" when missing and require "(inferred)" on any step not in the user's words. This was not tested, so it is not part of the final prompt.

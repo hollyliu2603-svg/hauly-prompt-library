@@ -364,3 +364,266 @@ Rationale: The core claim is an unverified, exaggerated medical-adjacent stateme
 
 **Next step recommended:** Founder to advise whether research questions (listed under each trend) should be commissioned before either topic proceeds to drafting, and whether the ice-rolling myth-check angle should be pursued at all given its risk profile.
 ~~~
+
+## Prompt Lab check (GPT-4.1 mini)
+
+To check the results weren't specific to one AI model, the first and final versions were re-run in La Trobe Prompt Lab using GPT-4.1 mini, with exactly the same prompt text. Prompt Lab's prompt review scores the prompt itself out of 100.
+
+**What GPT-4.1 mini did — noticeably different from Claude Sonnet 5:**
+
+| Check | Claude Sonnet 5 (V2 / V3) | GPT-4.1 mini V2 | GPT-4.1 mini V3 |
+| --- | --- | --- | --- |
+| Slugging classification | Established technique, narrow snapshot / "Unclear" | "Emerging" | "Established" |
+| Ice-rolling status | "Not suitable for Gazette development" (both) | "Suitable for founder review" | "Suitable for founder review" |
+| Outside facts | Several / a few | Many, e.g. "no credible scientific evidence", "may temporarily reduce redness or inflammation", "cold compresses"; recommended "dermatologist quotes" that don't exist | Many, e.g. the overnight cure is "medically unlikely", cystic acne "requires professional treatment"; recommended "expert quotes" |
+| Questions to research | — / inside section (2) | Not asked for in V2 | Listed once at the very end |
+
+- **Prompt Lab review:** V2 scored 91.5/100 and V3 scored 90.5/100 — both high, and almost the same — even though both outputs broke the prompt's own rules (for example, using "emerging" or "established" when only one video was supplied).
+
+**What this adds:** a high review score does not guarantee a well-behaved output, and the same prompt behaved differently on two models. On GPT-4.1 mini, the V3 "no outside facts" rule made no clear difference. The output itself, not just the prompt, has to be checked by a person.
+
+### Prompt Lab — V2
+
+**Recorded response (GPT-4.1 mini)**
+
+~~~text
+Trend 1: Slugging on TikTok
+
+(1) Trend overview  
+Slugging involves applying a thick occlusive moisturizer at night to lock in hydration. The trend is currently emerging, as shown by 2.1M views on a top TikTok video from August 2026. The content mainly features fair/light-skinned creators, suggesting some demographic concentration but not necessarily exclusivity.
+
+(2) Evidence limitations  
+The evidence is primarily anecdotal and visual, without scientific backing or clinical studies. The trend’s benefits are implied rather than objectively measured. There is no information about long-term effects or suitability for all skin types. Claims about slugging’s effectiveness should not be treated as universally proven.
+
+(3) Relevance to Hauly: 4/5  
+Slugging relates directly to skincare routine organization and education. It can support teaching about moisturizing techniques, occlusive products, and skin barrier care. However, since it may not suit all skin types or climates, caution is advised.
+
+(4) Content recommendation  
+- Working title: “Slugging 101: What It Is, Who It’s For, and How to Do It Safely”  
+- Angle: Educational deep-dive into the slugging trend focusing on moisturizing science, skin barrier health, and suitability considerations.  
+- Target reader: Skincare enthusiasts curious about hydrating techniques, including beginners and those expanding routines.  
+- Three key learning points:  
+  1. What slugging is and how occlusive moisturizers work  
+  2. Skin types and conditions that may benefit or may want to avoid slugging  
+  3. How to incorporate slugging safely into a skincare routine without over-moisturizing or causing breakouts  
+- Format: Illustrated article with dermatologist quotes, product types explained, and step-by-step application guide  
+- Evergreen / seasonal / trend-led: Evergreen with a trend-led hook
+
+(5) Bias and inclusion review  
+- Beginner: Clear explanations, avoids jargon, includes step-by-step guidance  
+- Budget-conscious: Highlights accessible occlusive moisturizers and DIY alternatives without promoting specific products  
+- Sensitive skin: Advises patch testing and consulting a dermatologist before trying occlusive layering  
+- Cultural background: Avoids skin tone assumptions; acknowledges that slugging may feel different in various climates and cultural skincare traditions  
+- Minimal routine: Suggests slugging as optional and adaptable, not mandatory  
+- Assumptions found: The trend’s visual emphasis on fair/light skin creators may unconsciously bias perceived suitability; the recommendation actively counters this by emphasizing inclusivity and skin type variation.
+
+(6) Editorial and safety risks  
+- Risk of promoting overuse of heavy moisturizers causing clogged pores or irritation if readers do not adapt to their skin’s needs  
+- No exaggerated claims; content carefully avoids promising universal benefits  
+- Encourages dermatologist consultation and patch testing to mitigate safety risks
+
+(7) Status  
+Suitable for founder review
+
+---
+
+Trend 2: Ice rolling claiming overnight cure for cystic acne
+
+(1) Trend overview  
+Ice rolling videos with captions claiming an overnight cure for cystic acne are trending on TikTok with 4.8M views in August 2026. The trend is emerging but lacks scientific validation.
+
+(2) Evidence limitations  
+There is no credible scientific evidence supporting ice rolling as a cure for cystic acne, especially not overnight. The claim is anecdotal and potentially misleading. Information about risks, skin types, and proper usage is absent.
+
+(3) Relevance to Hauly: 2/5  
+While relating to skincare tools, the exaggerated claim risks misinformation. Hauly’s educational mandate advises caution in promoting claims that could mislead users or delay professional treatment.
+
+(4) Content recommendation  
+- Working title: “Ice Rolling and Acne: What Science Says About This Trend”  
+- Angle: Educational myth-busting article explaining what ice rolling is, its potential benefits and limitations, and why it’s not a cure for cystic acne  
+- Target reader: Users interested in skincare tools and acne management seeking reliable information  
+- Three key learning points:  
+  1. What ice rolling is and how it may temporarily reduce redness or inflammation  
+  2. Why cystic acne requires professional care and cannot be cured overnight by topical tools  
+  3. Safe ways to integrate cooling techniques without risking skin damage or delaying treatment  
+- Format: Q&A style article with expert input and warnings against misleading claims  
+- Evergreen / seasonal / trend-led: Trend-led with evergreen educational value
+
+(5) Bias and inclusion review  
+- Beginner: Uses simple language and explains medical terms  
+- Budget-conscious: Does not promote expensive tools; focuses on accessible alternatives like cold compresses  
+- Sensitive skin: Highlights potential risks of ice rolling on sensitive or damaged skin  
+- Cultural background: Avoids assumptions about skin types or acne causes; includes diverse examples  
+- Minimal routine: Encourages focusing on core acne treatments rather than trendy tools  
+- Assumptions found: None significant; the article counters hype rather than endorsing it.
+
+(6) Editorial and safety risks  
+- High risk of spreading misinformation if the claim is repeated uncritically  
+- Important to clearly state that ice rolling is not a substitute for dermatological care  
+- Avoids exaggerated claims; prioritizes safety and evidence-based advice
+
+(7) Status  
+Suitable for founder review
+~~~
+
+**Prompt Lab review:** overall score 91.5/100
+
+~~~text
+Rubric Scores
+* Clarity: 90/100 - The prompt is mostly clear with detailed instructions and expected output format, but some sentences are long and complex, which could be simplified for easier comprehension.
+* Constraints: 95/100 - The prompt strongly constrains the assistant to use only supplied information, avoid inventing data, and focus on specific risks and inclusivity, which is excellent.
+* Structure: 90/100 - The prompt provides a well-organized, stepwise output structure, but the dense paragraph format could be improved with clearer bulleting or numbering for readability.
+* Verifiability: 90/100 - The prompt emphasizes using only supplied data and avoiding invented claims, supporting verifiability, though it could explicitly require citing supplied data points in the output.
+* Hallucination Risk: 95/100 - The prompt explicitly forbids inventing engagement figures or audience reactions and requires bias and safety checks, minimizing hallucination risk effectively.
+Overall score: 91.5/100
+Top Improvements
+* Simplify and break down complex sentences to improve clarity and ease of understanding.
+* Use bullet points or numbered lists in the prompt to better highlight the expected output sections and instructions.
+* Explicitly instruct the assistant to reference or quote supplied data points in the output to further enhance verifiability.
+(Suggested rewrite: same content as the prompt, reformatted into bullet points and numbered sections.)
+~~~
+
+### Prompt Lab — V3 (final)
+
+**Recorded response (GPT-4.1 mini)**
+
+~~~text
+**Trend 1: Slugging (TikTok, Aug 2026)**
+
+(1) **Trend overview**  
+Slugging involves layering a thick occlusive moisturizer at night. The trend appears established on TikTok with 2.1M views on the top video, mainly demonstrated by fair/light-skin creators. It is presented as a nighttime skincare step.
+
+(2) **Evidence limitations**  
+The claim that slugging benefits skin after consistent use is anecdotal. The trend shows limited diversity in skin tones and types, mainly fair/light skin. There is no clinical evidence provided for its efficacy or safety across all skin types. The thick occlusive layer might not suit everyone and could potentially cause issues for some skin types or climates. No long-term effects or risks are discussed.
+
+(3) **Relevance to Hauly**  
+Score: 3  
+Slugging is relevant because it involves a skincare routine step that users might want to track or learn about. However, the lack of diverse representation and potential limitations for certain skin types reduce its universal appeal. It aligns with Hauly’s educational focus if presented with nuance.
+
+(4) **Content recommendation**  
+- Working title: “Is Slugging Right for Your Nighttime Skincare Routine? What You Need to Know”  
+- Angle: An educational overview of slugging, explaining the concept, potential benefits, and considerations for different skin types and climates, emphasizing critical evaluation of trends.  
+- Target reader: Hauly users curious about new skincare techniques and looking to understand if slugging fits their routine.  
+- Three key learning points:  
+  1. What slugging is and how it fits into a skincare routine.  
+  2. Which skin types or conditions might benefit or be cautious with slugging.  
+  3. Importance of patch testing and monitoring skin response.  
+- Format: Article with expert quotes and user experience snapshots.  
+- Evergreen / seasonal / trend-led: Evergreen with trend-led origins.
+
+(5) **Bias and inclusion review**  
+- Beginner: Content explains terms simply without assuming prior knowledge.  
+- Budget-conscious: Does not assume access to high-end products; emphasizes adapting with available moisturizers.  
+- Sensitive skin: Explicit discussion of potential risks or unsuitability included.  
+- Different cultural backgrounds: Avoids assumptions about skin types or climates; acknowledges variation.  
+- Minimal routine: Suggests slugging as optional, not mandatory, respecting minimal routines.  
+- Assumptions found: The trend’s visual dominance by fair/light skin creators could bias readers into thinking it suits all skin tones equally; the article mitigates this with inclusive language.
+
+(6) **Editorial and safety risks**  
+- Risk of endorsing slugging as universally beneficial mitigated by balanced presentation.  
+- No exaggerated claims or medical advice given.  
+- Encourages caution and consultation with skincare professionals.  
+- No product endorsements, so minimal commercial bias.
+
+(7) **Status**  
+Suitable for founder review.
+
+---
+
+**Trend 2: Ice Rolling Claims (TikTok, Aug 2026)**
+
+(1) **Trend overview**  
+Ice rolling videos claim an overnight cure for cystic acne, trending with 4.8M views on TikTok. The trend presents ice rolling as a quick fix for severe acne.
+
+(2) **Evidence limitations**  
+The claim of an “overnight cure” is unsubstantiated and medically unlikely. No clinical evidence supports ice rolling as a cure for cystic acne. Potential risks or side effects are unaddressed. The trend risks misleading users about the seriousness and treatment timelines of cystic acne.
+
+(3) **Relevance to Hauly**  
+Score: 1  
+Due to exaggerated claims and medical misinformation risk, this trend is poorly aligned with Hauly’s educational goals. While skincare routines are relevant, promoting unproven cures contradicts Hauly’s responsible education mission.
+
+(4) **Content recommendation**  
+- Working title: “Ice Rolling and Acne: Separating Fact from Fiction”  
+- Angle: Debunking the myth of ice rolling as an overnight cystic acne cure; educating about realistic acne management and the limits of topical tools.  
+- Target reader: Users encountering acne trends online and seeking trustworthy information.  
+- Three key learning points:  
+  1. What ice rolling is and what it can and cannot do for skin.  
+  2. Why cystic acne requires professional treatment and realistic expectations.  
+  3. How to critically evaluate viral skincare claims.  
+- Format: Fact-check article with expert commentary and myth-busting section.  
+- Evergreen / seasonal / trend-led: Trend-led with evergreen educational value.
+
+(5) **Bias and inclusion review**  
+- Beginner: Uses clear language, explaining terms and medical context.  
+- Budget-conscious: Does not assume expensive treatments but emphasizes professional advice.  
+- Sensitive skin: Highlights that cystic acne is serious and requires care, not quick fixes.  
+- Different cultural backgrounds: Avoids assumptions about access to care but stresses importance of professional consultation.  
+- Minimal routine: Acknowledges some users may not have complex routines but warns against relying on unproven quick fixes.  
+- Assumptions found: Assumes access to healthcare or dermatology services, which may not be universal; this is stated carefully as a recommendation rather than a requirement.
+
+(6) **Editorial and safety risks**  
+- High risk of misinformation if content is not clear about limits of ice rolling.  
+- Must avoid implying ice rolling replaces medical treatment.  
+- Risks of users delaying proper care if misled must be explicitly addressed.  
+- No product promotion to avoid commercial bias.
+
+(7) **Status**  
+Suitable for founder review.
+
+
+---
+
+**Summary:**  
+Both trends offer educational opportunities aligned with Hauly’s editorial mission if approached critically and inclusively. Slugging can be presented as an optional technique with caveats, while ice rolling requires myth-busting to prevent misinformation. Both require founder review before publishing.  
+
+**Questions to research:**  
+- What clinical evidence exists about occlusive moisturizers’ effects for different skin types?  
+- Are there dermatological guidelines on slugging or thick occlusive layering?  
+- What are the medically recommended treatments for cystic acne, and what is the role of home tools like ice rollers?  
+- How do different skin tones and types respond to slugging and ice rolling respectively?
+~~~
+
+**Prompt Lab review:** overall score 90.5/100
+
+~~~text
+Rubric Scores
+Clarity: 90/100 - The prompt is detailed and mostly clear, but the dense instructions and multiple nested requirements could be streamlined for easier comprehension.
+Constraints: 95/100 - The prompt strongly constrains the assistant to use only supplied information, avoid inventing data, and avoid background facts, which is excellent.
+Structure: 85/100 - The prompt specifies a clear multi-section output format, but the complexity and length of instructions could be better organized or broken down for clarity.
+Verifiability: 90/100 - The prompt emphasizes using only supplied information and flags unsupported claims, supporting verifiability well.
+Hallucination Risk: 95/100 - The prompt explicitly forbids inventing engagement figures, sources, or background facts, minimizing hallucination risk effectively.
+Overall Score
+Overall score: 90.5/100
+
+Top Improvements
+Simplify and break down instructions into numbered or bullet points to improve readability and reduce cognitive load.
+Clarify the expected output format upfront with a concise template or example to guide the assistant.
+Explicitly highlight the importance of neutrality and inclusivity earlier in the prompt to reinforce these constraints.
+Suggested Rewrite
+Role: You are Hauly's beauty editorial strategist.
+
+Context: Hauly is an app for organizing makeup and skincare collections. The Gazette is Hauly’s in-app editorial section focused on practical beauty and skincare education, not product selling.
+
+Task: Analyze the supplied social media trends and decide which are relevant to Hauly’s audience and the Gazette. For each trend, produce a content recommendation that:
+
+Uses only the supplied information; do not invent engagement figures, sources, audience reactions, or background facts.
+Considers whether the trend supports Hauly’s educational purpose, could become a lasting (evergreen) article, and whether it poses medical, safety, misinformation, or exaggerated-claim risks.
+Uses inclusive language and avoids assuming one skin tone, gender, age, skin type, budget, or routine represents all Hauly users.
+Does not describe a trend as suitable for everyone.
+If background knowledge would help, list it as a question in a "Questions to research" section instead of stating it as fact.
+For each trend, provide seven sections:
+
+Trend overview — summarize the evidence and classify the trend as established, emerging, or unclear.
+Evidence limitations — identify missing information and unproven claims.
+Relevance to Hauly — score from 1 to 5.
+Content recommendation — include working title, angle, target reader, three key learning points, format, and whether it is evergreen, seasonal, or trend-led.
+Bias and inclusion review — test the recommendation against a beginner, budget-conscious user, sensitive skin user, different cultural backgrounds, and minimal routine user; name any assumptions found.
+Editorial and safety risks — identify any risks or concerns.
+Status — choose one: "suitable for founder review," "needs more evidence," or "not suitable for Gazette development."
+The output must be reviewed and approved by the founder before publishing.
+
+Supplied trends:
+
+TikTok, Aug 2026: "POV: my skin after slugging every night for a month ✨" — slugging (layering a thick occlusive moisturizer at night), mostly shown by fair/light-skin creators, 2.1M views on top video.
+TikTok, Aug 2026: "Ice rolling literally cured my cystic acne overnight!!" — ice roller videos claiming an overnight cure for cystic acne, 4.8M views, trending audio.
+~~~

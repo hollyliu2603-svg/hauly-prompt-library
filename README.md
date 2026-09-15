@@ -5,7 +5,7 @@ La Trobe University, Term 5 2026
 
 ## 1. Business context
 
-Hauly is an iPhone app for organising a personal makeup and skincare collection. Users track the products they own and their expiry dates, keep a restock list, find lookalike products, read the Gazette (Hauly's in-app editorial section), and share with friends in Circle, a private social feed. Hauly is deliberately **for organising, not shopping**: it shows no prices or shopping features, and social features use @usernames rather than real names. Free accounts can save up to 35 products; Hauly Plus is the paid upgrade.
+Hauly is an iPhone app for organising a personal makeup and skincare collection. Users track the products they own and their expiry dates, keep a restock list, find lookalike products, read the Gazette (Hauly's in-app editorial section), and share with friends in Circle, a private social feed. Hauly is deliberately **for organising, not shopping**: it shows no prices or shopping features, and social features use @usernames; each user decides whether to add a first name, which may or may not be their real one. Free accounts can save up to 35 products; Hauly Plus is the paid upgrade.
 
 Hauly is run by one person. As solo founder, Holly handles every operational job — support, bug triage, feature planning, community moderation, content and reporting — jobs a larger company would split across several roles.
 
@@ -34,7 +34,7 @@ The prompts give the AI checked facts about Hauly instead of letting it guess. T
 | --- | --- |
 | **App tabs:** Haul, Restock, Match, Studio (which contains Learn and the Gazette), Circle | Prompts 1, 6 |
 | **Organising, not shopping:** no prices or shopping features; the only exception is free-text prices on Rehome posts, shown only to the author | Prompts 5, 7 |
-| **Privacy:** Circle uses @usernames only, never real names | Prompts 5, 7 |
+| **Privacy:** Circle uses @usernames; a first name is optional and chosen by the user | Prompts 5, 7 |
 | **Wording:** "lookalike", never "dupe" | Prompts 2, 5 |
 | **Plans:** free accounts can save up to 35 products; Hauly Plus removes the limit | Prompt 5 |
 | **Ingredient pairing list:** retinoids with AHAs, BHAs or vitamin C, and benzoyl peroxide with retinoids, AHAs, BHAs or vitamin C, should be introduced carefully — "can be harsh together — introduce them gradually or on alternate days" | Prompt 3 |
@@ -58,7 +58,7 @@ Giving the AI a role and describing the task precisely are among the core techni
 
 ## 5. How the prompts were tested and improved
 
-Module 1, Topic 3 recommends treating each prompt "as a hypothesis to be validated" through A/B testing. Each version of every prompt was run once on the same sample input and the outputs were compared. Where the improved version still fell short, further versions were written and tested: Prompts 1 and 2 have four versions, and Prompts 6 and 7 have three.
+Module 1, Topic 3 recommends treating each prompt "as a hypothesis to be validated" through A/B testing. Each version of every prompt was run once on the same sample input and the outputs were compared. Where the improved version still fell short, further versions were written and tested: Prompts 1, 2 and 7 have four versions, and Prompts 5 and 6 have three. Prompts 5 and 7 gained their last version in a maintenance re-test after the first-name wording was corrected.
 
 | Prompt | What went wrong in the first version | What the final version did |
 | --- | --- | --- |
@@ -68,12 +68,14 @@ Module 1, Topic 3 recommends treating each prompt "as a hypothesis to be validat
 | 4 | Invented a technical cause for the bug | Gave no cause and marked guessed steps as "(inferred)" |
 | 5 | Scored a price-comparison request 4/5 for value | Scored it 1/5 for fit and flagged a direct conflict with Hauly's no-prices principle |
 | 6 | Invented Gazette sections and ignored how weak the evidence was | Rated evidence as thin, turned outside facts into research questions (a few general statements remained) |
-| 7 | Output "remove", implying automatic deletion | Output "recommend_remove" with a human-review flag; the self-check didn't change the decision on this post |
+| 7 | Output "remove", implying automatic deletion | Output "recommend_remove" with a human-review flag; the self-check didn't change the decision on this post; after the first-name rule was corrected, it allowed a post using a user's chosen first name |
 | 8 | Silently guessed what kind of content to write | Asked for clarification instead of guessing |
 | 9 | Missing a Role | Role added; both versions met every rule, so no visible difference |
 | 10 | Presented guesses as facts | Separated given numbers from guesses and marked missing data |
 
-Each prompt's page shows every version's full prompt text and recorded response. The [Evaluation](evaluation.md) compares the two most detailed examples.
+**Cross-model check in La Trobe Prompt Lab.** Prompts 1–7 were also re-run in Prompt Lab using GPT-4.1 mini, with the same prompt text, and most were scored by Prompt Lab's prompt review. The main findings held: first versions invented causes (Prompt 4), ignored Hauly's principles (Prompt 5) and implied automatic removal (Prompt 7), while final versions fixed them. But GPT-4.1 mini followed some rules less closely — Prompt 2's final version hinted at data recovery, and Prompt 6 added outside facts and marked the ice-rolling trend "suitable for founder review". Prompt Lab's review gave high scores (72–91.5/100) even to prompts whose outputs broke their own rules, so reviews were treated as advice, not proof.
+
+Each prompt's page shows every version's full prompt text and recorded response, plus the Prompt Lab results. The [Evaluation](evaluation.md) compares the two most detailed examples.
 
 ## 6. Report contents
 

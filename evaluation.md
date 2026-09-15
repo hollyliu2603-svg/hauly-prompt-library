@@ -8,11 +8,27 @@ Module 1, Topic 3 (La Trobe University, 2026) describes treating each prompt "as
 2. **Test it** on a sample input written to reflect real Hauly features.
 3. **Find what went wrong** in the output.
 4. **Fix the prompt (v2)** and test it on the *same* input, so the two outputs can be compared fairly.
-5. **Repeat (v3, v4)** where the new version still fell short — Prompts 1 and 2 reached v4, and Prompts 6 and 7 reached v3.
+5. **Repeat (v3, v4)** where the new version still fell short — Prompts 1, 2 and 7 reached v4, and Prompts 5 and 6 reached v3 (the last versions of Prompts 5 and 7 were a maintenance re-test after correcting the first-name wording).
 
-All tests were run in September 2026 using Claude Sonnet 5, with no other instructions added. Each version was run once. Because AI outputs vary from run to run, one run shows what the prompt *can* produce, not what it will produce every time.
+All tests were run in September 2026 using Claude Sonnet 5, with no other instructions added. The maintenance re-tests of Prompts 5 and 7 were run through the Claude Code command line, which adds a short identity line, the date and the account email; re-running the previous versions in that setup gave the same results. Each version was run once. Because AI outputs vary from run to run, one run shows what the prompt *can* produce, not what it will produce every time.
 
 Across the ten prompts, the most common problem in first versions was the AI **adding information that wasn't given** — an invented team (Prompt 2), an invented bug cause (Prompt 4), invented app sections (Prompt 6), and guesses presented as facts (Prompt 10). This matches research showing that language models "can generate outputs that are untruthful", and that even a model trained to follow instructions "still makes simple mistakes" (Ouyang et al., 2022, p. 1). The most effective fix was a direct rule telling the AI to use only the facts given, and what to do instead when something is missing.
+
+## Cross-model check (La Trobe Prompt Lab, GPT-4.1 mini)
+
+To check the results weren't specific to one model, the first and/or final versions of Prompts 1–7 were re-run in La Trobe Prompt Lab using GPT-4.1 mini, with the same prompt text. Most runs were also scored by Prompt Lab's prompt review, which rates the prompt out of 100.
+
+| Prompt | Held on GPT-4.1 mini | Differed on GPT-4.1 mini |
+| --- | --- | --- |
+| 1 (V4) | Correct data types, allowed labels, review flag | Labelled lost data as a second `bug` rather than `complaint` |
+| 2 (V1, V3, V4) | V1 still wrote as a team; V3 invented nothing | V4 hinted at "how to recover your data" — not an approved fact |
+| 3 (V1, V2) | V1 reassured and missed Hauly pairings; V2 exactly matched Hauly's list | — |
+| 4 (V1, V2) | V1 invented a technical cause; V2 gave none | V2 marked fewer assumed steps and skipped "not provided" |
+| 5 (V1, V3) | V1 scored value 4/5; V3 scored fit 1/5 and flagged the conflict | Different demand and build-effort scores |
+| 6 (V2, V3) | — | Used "emerging"/"established" on one-video evidence, marked ice rolling "suitable for founder review", and stated many outside facts |
+| 7 (V1, V4) | V1 said "remove"; V4 flagged both rules and required human review | V1 missed the real name; V4 chose `flag_for_review` instead of `recommend_remove` |
+
+**What the reviews showed:** Prompt Lab's review scored every prompt between 72 and 91.5 out of 100. It did not notice that Prompt 5 V1 lacked Hauly's principles, or that Prompt 7 V1's "remove" implied automatic deletion, and it scored Prompt 6 at over 90 even though the outputs broke the prompt's rules. Two suggestions asked for things the prompts already contained. The review is useful for checking how clearly a prompt is written, but it cannot replace testing the output against the business's real rules.
 
 The two comparisons below show the process in the most detail.
 

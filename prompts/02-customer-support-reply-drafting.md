@@ -215,3 +215,42 @@ Reply: Thanks for flagging this — I can see how frustrating that must be. I'm 
 
 Review: YES — multiple issues reported (crash + lost data) and message mentions lost data, with no confirmed workaround or data recovery.
 ~~~
+
+## Prompt Lab check (GPT-4.1 mini)
+
+To check the results weren't specific to one AI model, the final version (and in some cases the first version) was re-run in La Trobe Prompt Lab using GPT-4.1 mini, with exactly the same prompt text. Prompt Lab's prompt review, where run, scores the prompt itself out of 100.
+
+**What GPT-4.1 mini did:**
+
+| Version | Result | Compared with Claude Sonnet 5 |
+| --- | --- | --- |
+| V1 | 91 words; one apology; "We're on it" and "let us know" (writing as a team); suggested restarting the app or device | Less extreme (Claude: 231 words, "flag this to our team"), but the same kind of problems |
+| V3 | 63 words; no team or invented fix; mentioned the lost work; asked for phone model and app version; no sign-off | Same result |
+| V4 | Followed the two-line Reply/Review format; Review said YES with correct reasons; **but the reply said "I'm still looking into the crashing issue and how to recover your data"** | **Broke a rule:** the approved facts said data recovery was not confirmed, and the prompt bans mentioning data recovery unless it's an approved fact. Claude Sonnet 5 did not do this |
+
+**What this adds:** the few-shot V4 did not prevent GPT-4.1 mini from hinting at data recovery. Rules and examples reduce invented promises, but a different model can still slip, so Holly's check before sending remains essential.
+
+### Prompt Lab — V1
+
+**Recorded response (GPT-4.1 mini)**
+
+~~~text
+Hi there! I'm really sorry to hear the app is crashing when you try to add a new product—that sounds super frustrating, especially after all the time you spent entering your collection. We're on it and want to fix this as quickly as possible. In the meantime, could you please let us know which device and app version you're using? Also, if you haven’t already, try restarting the app or your device to see if that helps. Thanks so much for your patience, and we appreciate you letting us know!
+~~~
+
+### Prompt Lab — V3
+
+**Recorded response (GPT-4.1 mini)**
+
+~~~text
+Thanks for letting me know the app crashes when you add a new product—that sounds really frustrating, especially after losing your work. I’m looking into what’s causing this and would appreciate if you could share your phone model and app version to help me pinpoint the issue. Hang in there, and I’m on it to get Hauly running smoothly for you again.
+~~~
+
+### Prompt Lab — V4 (using the GPT-4.1 mini triage record from Prompt 1)
+
+**Recorded response (GPT-4.1 mini)**
+
+~~~text
+Reply: Thanks for reaching out and sharing this—I'm really sorry for the trouble you’re having. I’m still looking into the crashing issue and how to recover your data. Could you tell me what device and app version you’re using? That’ll help a lot. — Holly  
+Review: YES — user reports app crashing and data loss, no confirmed fix or data recovery yet.
+~~~

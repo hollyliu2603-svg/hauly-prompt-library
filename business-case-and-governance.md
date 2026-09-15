@@ -11,7 +11,7 @@ Hauly has one founder doing every operational job: answering support, sorting bu
 A library of ten tested prompts, one for each repeating job (see the [workflow table](README.md#2-the-workflow)). Module 1, Topic 3 describes prompt libraries as giving each automated workflow "a consistent, high-quality starting point". Each prompt:
 
 - produces the same structure every time, so results can be compared and tracked
-- has Hauly's real rules built in — no prices or shopping features, @usernames only, "lookalike" not "dupe", and Hauly's own ingredient pairing list
+- has Hauly's real rules built in — no prices or shopping features, @usernames with an optional user-chosen first name, "lookalike" not "dupe", and Hauly's own ingredient pairing list
 - says clearly what the AI must **not** do (guess causes, invent facts, remove posts, publish content)
 - connects to the next step: structured outputs (for example Prompt 1's triage record) can be passed straight into another prompt (Prompt 2), which is where most of the automation potential comes from
 
@@ -67,8 +67,10 @@ Module 1, Topic 3 identifies three main risks of automating work with AI — hal
 
 ## 6. Limitations
 
-- **Testing was small.** Each version was run once on one sample input. AI outputs vary, so larger testing is needed before relying on any prompt.
+- **Testing was small.** Each version was run once on one sample input (plus one cross-check on GPT-4.1 mini for Prompts 1–7). AI outputs vary, so larger testing is needed before relying on any prompt.
+- **Results differ between AI models.** In Prompt Lab, GPT-4.1 mini followed some rules less closely than Claude Sonnet 5 — for example, Prompt 6 marked the ice-rolling trend "suitable for founder review" and Prompt 2 hinted at data recovery. Any change of model should be followed by re-testing.
+- **Prompt review scores are not proof.** Prompt Lab's review scored all tested prompts 72–91.5/100, including prompts whose outputs broke their own rules.
 - **Sample inputs, not real data.** Test messages were written to match real Hauly features. Real user messages may be messier or more varied.
 - **Rules reduce mistakes but don't remove them.** Prompt 6's final version still included a few outside statements, and Prompt 7's self-check was not proven to change decisions.
-- **The AI only knows what is in the prompt.** It can't see the app's code, real user accounts, or live social media, so prompts must be kept up to date as Hauly changes.
+- **The AI only knows what is in the prompt.** It can't see the app's code, real user accounts, or live social media, so prompts must be kept up to date as Hauly changes. For example, Prompts 5 and 7 first said "@usernames only, never real names", but Hauly lets each user choose whether to add a first name. The wording was corrected and both prompts were re-tested.
 - **Some prompts are only as good as their inputs.** Prompt 3 depends on Hauly's pairing list, and Prompt 10 depends on the other prompts' results being logged consistently.

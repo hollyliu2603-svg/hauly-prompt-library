@@ -182,3 +182,45 @@ Do not invent details that are not in the message.
 }
 ```
 ~~~
+
+## Prompt Lab check (GPT-4.1 mini)
+
+To check the results weren't specific to one AI model, the final version (and in some cases the first version) was re-run in La Trobe Prompt Lab using GPT-4.1 mini, with exactly the same prompt text. Prompt Lab's prompt review, where run, scores the prompt itself out of 100.
+
+**What GPT-4.1 mini did:**
+
+- **Same result as Claude Sonnet 5:** `issues` and `review_reasons` were lists, `needs_human_review` was `true` (not text), only allowed labels were used, and review was required because of multiple issues and lost data.
+- **Difference:** it labelled the lost collection as a second `bug`; Claude Sonnet 5 labelled it `complaint`. Both are allowed options, so the category list could say more clearly which to use for data loss.
+- **Same weakness:** it also wrapped the JSON in code-formatting marks despite "no text outside it".
+
+This response was also used as the triage record for the Prompt 2 check.
+
+### Prompt Lab — V4
+
+**Recorded response (GPT-4.1 mini)**
+
+~~~text
+```json
+{
+  "issues": [
+    {
+      "category": "bug",
+      "urgency": "high",
+      "affected_tab": "Haul",
+      "one_line_summary": "App crashes when adding new product to Haul"
+    },
+    {
+      "category": "bug",
+      "urgency": "high",
+      "affected_tab": "Haul",
+      "one_line_summary": "Lost half of collection already typed in"
+    }
+  ],
+  "needs_human_review": true,
+  "review_reasons": [
+    "Multiple issues reported",
+    "Lost data mentioned"
+  ]
+}
+```
+~~~
