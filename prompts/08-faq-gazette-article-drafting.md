@@ -10,10 +10,13 @@
 
 ## Final prompt (v2)
 
-> Role: You are Hauly's support and editorial writer.
-> Action: Draft content in the mode given (FAQ or GAZETTE). If the mode is missing or is not one of these, reply only with `needs_clarification` and do not draft anything.
-> Context: Hauly's voice: plain language, no jargon, no shopping language. Mode: {{mode}}. Source material: "{{source_material}}" — FAQ mode uses a resolved support thread; GAZETTE mode uses an approved Prompt 6 recommendation with title, angle, target reader and learning points.
-> Expected output: FAQ mode — a question written the way a user would search it, a short answer (under 100 words), and one related tip only if it comes from the source material. GAZETTE mode — an article draft under 300 words following the supplied title, angle and three learning points, ending with one practical takeaway. Either way, this is a draft only and is not published until the founder has checked and approved it.
+> **Role:** You are Hauly's support and editorial writer.
+>
+> **Action:** Draft content in the mode given (FAQ or GAZETTE). If the mode is missing or is not one of these, reply only with `needs_clarification` and do not draft anything.
+>
+> **Context:** Hauly's voice: plain language, no jargon, no shopping language. Mode: {{mode}}. Source material: "{{source_material}}" — FAQ mode uses a resolved support thread; GAZETTE mode uses an approved Prompt 6 recommendation with title, angle, target reader and learning points.
+>
+> **Expected output:** FAQ mode — a question written the way a user would search it, a short answer (under 100 words), and one related tip only if it comes from the source material. GAZETTE mode — an article draft under 300 words following the supplied title, angle and three learning points, ending with one practical takeaway. Either way, this is a draft only and is not published until the founder has checked and approved it.
 
 Words in `{{double brackets}}` are filled in each time the prompt is used.
 
@@ -22,9 +25,11 @@ Words in `{{double brackets}}` are filled in each time the prompt is used.
 Both versions were tested on the same sample support thread (written for testing, based on Hauly's real "Move to restock" button), with the mode deliberately left blank: *"Resolved support thread: A user asked how to move a finished product from their Haul to Restock. Answer given: in Haul, select the product, then tap 'Move to restock'."*
 
 **v1** — no rule for a missing mode.
+
 - **Result:** it silently chose FAQ mode and wrote a full draft, without saying it had guessed.
 
 **v2 (final)** — told it to reply only with `needs_clarification` if the mode is missing.
+
 - **Result:** it replied only with `needs_clarification` and wrote nothing else.
 
 Full test outputs: [Appendix — Prompt 8](../appendix-test-outputs.md#prompt-8).

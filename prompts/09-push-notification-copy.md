@@ -10,10 +10,13 @@
 
 ## Final prompt (v2)
 
-> Role: You are Hauly's in-house copywriter, writing announcement copy for users.
-> Action: Write a push notification and an in-app banner for the announcement below.
-> Context: Hauly's voice: plain, warm, never salesy. Announcement: "{{announcement}}"
-> Expected output: Push notification of no more than 40 characters. Banner no more than 25 words. No stacked exclamation marks, no urgency or fear-of-missing-out language ("don't miss out", "limited time"). Output as: {"push": "...", "banner": "..."}
+> **Role:** You are Hauly's in-house copywriter, writing announcement copy for users.
+>
+> **Action:** Write a push notification and an in-app banner for the announcement below.
+>
+> **Context:** Hauly's voice: plain, warm, never salesy. Announcement: "{{announcement}}"
+>
+> **Expected output:** Push notification of no more than 40 characters. Banner no more than 25 words. No stacked exclamation marks, no urgency or fear-of-missing-out language ("don't miss out", "limited time"). Output as: {"push": "...", "banner": "..."}
 
 Words in `{{double brackets}}` are filled in each time the prompt is used.
 
@@ -26,6 +29,7 @@ All versions were tested on the same sample message (written for testing, based 
 **v2 (final)** — added the Role.
 
 **Test results:**
+
 - **v1:** push *"Scan ingredients, get plain English"* (35 characters); banner 17 words.
 - **v2:** push *"Scan a label for a plain-English report"* (39 characters); banner 18 words.
 - Both met every rule. **Adding the Role made no visible difference in this test.** The change keeps the prompt consistent with the RACE structure; it is not evidence of better copy.
