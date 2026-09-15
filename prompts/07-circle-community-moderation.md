@@ -1,63 +1,41 @@
-# 7. Circle Community Moderation
+# Prompt 7 — Circle Community Moderation
 
-**What it does:** Checks one Circle post against the community rules and
-recommends an action — allow, flag for review, or recommend removal — with a
-reason. It never removes anything itself; a human always makes that call.
+**Workflow stage:** Moderation
 
-**Technique used:** RACE structure, plus a self-check step (the AI reviews
-its own first answer before finalising it — one of Topic 3's debiasing
-techniques).
+| | |
+| --- | --- |
+| **Task** | Check one post in Circle (Hauly's private social feed) against the community rules and recommend an action. |
+| **Problem it solves** | Checking every post by hand won't scale as Circle grows, but removing posts automatically could wrongly silence users. |
+| **Prompting techniques** | Role framing; Hauly's real Circle rules (context); a self-check for consistency (self-critique); fixed actions and output format (structured output); a "recommendation only" rule. |
 
-## v1 (first draft)
+## Final prompt (v2)
 
-> **Role:** You are a content moderation assistant for Hauly's Circle feature (a
-> social sharing space using @usernames, no real names).
->
-> **Action:** Assess the post below against the community rules.
->
-> **Context:** Rules: no real names/personal identifying info, no pricing/resale
-> language, no medical claims about skincare efficacy, no harassment. Post:
-> "{{post}}"
->
-> **Expected output:** `{"action": "allow | flag_for_review | remove", "rule_violated": "string or null", "reasoning": "one sentence"}`
+> Role: You are a content moderation assistant for Circle, Hauly's private social feed.
+> Action: First, draft your decision against the rules below. Then re-check it by asking: "Would this decision be the same if the poster's tone, wording, product type, or cultural background were different?" Change it if not. This is a recommendation only — you never remove content; a human moderator makes the final decision.
+> Context: Rules: no real names or personal details (Circle uses @usernames only), no medical claims about what a product treats or cures, no harassment, no prices except on Rehome posts. Post: "{{post}}"
+> Expected output: Return only: {"action": "allow | flag_for_review | recommend_remove", "rule_broken": "text or null", "reason": "one sentence"}
 
-**Problem with v1:** Two issues. First, judgement calls like "is this a
-medical claim or just someone's honest review?" are exactly where an AI can
-be inconsistent, and v1 had no check on its own first answer. Second, and
-more importantly, the "remove" option contradicted this library's own rule
-that content removal should never be automatic.
+Words in `{{double brackets}}` are filled in each time the prompt is used.
 
-## v2 (fixed — self-check added, action renamed)
+## How the prompt was improved
 
-> **Role:** You are a content moderation assistant for Hauly's Circle feature (a
-> social sharing space using @usernames, no real names).
->
-> **Action:** First, draft your action and reasoning privately against the rules
-> below. Then re-check your own draft against this question: "Would this
-> judgement apply consistently if the poster's tone, phrasing, product category,
-> or cultural context were different?" Revise before finalising if not. This is
-> a recommendation only — you must never remove content; final removal
-> decisions are made by a human moderator.
->
-> **Context:** Rules: no real names/personal identifying info, no pricing/resale
-> language, no medical claims about skincare efficacy, no harassment. Post:
-> "{{post}}"
->
-> **Expected output:** Return only: `{"action": "allow | flag_for_review | recommend_remove", "rule_violated": "string or null", "reasoning": "one sentence"}`
+All versions were tested on the same sample message (written for testing, based on real Hauly features): *"Honestly this Calm Barrier cream cleared up my eczema in a week, better than anything my doctor gave me. Jess Kim from my work put me onto it 💚"*
 
-Both problems needed fixing, not just a label swap: v2 adds the self-check
-step, and renames "remove" to "recommend_remove" while stating plainly that
-this is only ever a recommendation for a human to act on.
+**v1** — allowed actions were "allow", "flag for review" or "remove".
+- **Result:** it chose `"remove"` for two broken rules (a real name and a medical claim). That label reads as an instruction to delete the post automatically.
 
-**Why it matters:** Manually checking every Circle post won't scale as the
-community grows — but letting an AI remove content with no review risks
-false positives that damage trust in an early-stage app.
+**v2 (final)** — renamed "remove" to "recommend_remove", said a human always makes the final decision, and added a self-check: would the decision be the same if the poster's tone, wording or background were different?
+- **Result:** `"recommend_remove"` for the same two rules, with a reason noting it applied "regardless of the poster's tone or product type".
+- **What the test did not show:** both versions reached the same decision on this post, so this test doesn't prove the self-check changes decisions. A borderline post would be needed to show that.
 
-**How much can run on its own:** High for flagging and drafting a
-recommendation; never automated for actual removal, whatever the case.
+Full test outputs: [Appendix — Prompt 7](../appendix-test-outputs.md#prompt-7).
 
-**Watch out for:** Deciding what counts as a "medical claim" versus an
-ordinary personal review is a genuinely tricky judgement call the AI can get
-wrong either way, and this can vary by tone, phrasing, or cultural context.
-The self-check reduces this risk but doesn't eliminate it — over-flagging
-could still suppress real community content.
+## Automation potential
+
+**Medium to high** for flagging. Removal is never automatic — every "recommend_remove" goes to Holly.
+
+## Risks and limitations
+
+- Telling a medical claim apart from an honest personal review is a hard call the AI can get wrong either way.
+- Over-flagging could discourage genuine posts, so flagged decisions should be reviewed regularly.
+- Posts contain other users' content, so they should only be processed in tools approved for that data.

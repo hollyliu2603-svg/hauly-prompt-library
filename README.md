@@ -1,63 +1,67 @@
-# Hauly Prompt Library — BUS4005 Assessment 1
+# Hauly Prompt Library
 
-Prompt portfolio for **BUS4005 — Individual Prompt Library, Oral Presentation
-and Report** (La Trobe University, Term 5 2026).
+**BUS4005 — Assessment 1: Individual Prompt Library, Oral Presentation and Report**
+La Trobe University, Term 5 2026
 
-**Business context:** Hauly is a solo-founder iOS app for cataloguing beauty
-and skincare collections. As sole founder, Holly personally handles user
-support, App Store review responses, Circle community moderation,
-feature-request triage, and content planning — five jobs a small team would
-normally divide among specialist roles. This library turns each into a
-repeatable prompt.
+## 1. Business context
 
-The 10 prompts form one pipeline: **intake → response → moderation → content
-planning → content drafting → reporting.**
+Hauly is an iPhone app for organising a personal makeup and skincare collection. Users track the products they own and their expiry dates, keep a restock list, find lookalike products, read the Gazette (Hauly's in-app editorial section), and share with friends in Circle, a private social feed. Hauly is deliberately **for organising, not shopping**: it shows no prices or shopping features, and social features use @usernames rather than real names. Free accounts can save up to 35 products; Hauly Plus is the paid upgrade.
 
-New to the terms used here (RACE, v1/v2, debiasing, etc.)? See
-[`GLOSSARY.md`](GLOSSARY.md) first — everything below is written to be
-explainable out loud, not just read.
+Hauly is run by one person. As solo founder, Holly handles every operational job — support, bug triage, feature planning, community moderation, content and reporting — jobs a larger company would split across several roles.
 
-## Contents
+## 2. The workflow
 
-| | |
-| --- | --- |
-| [`GLOSSARY.md`](GLOSSARY.md) | Plain-language definitions — read this first if presenting out loud |
-| [`prompts/`](prompts/) | One file per prompt (1–10). Every prompt has a short "v1 → v2" note showing what changed and why; the two most-reworked (2 and 6) show the full before/after |
-| [`evaluation.md`](evaluation.md) | Before/after comparison + real generated outputs for Prompts 2 and 6 |
-| [`governance-and-business-case.md`](governance-and-business-case.md) | How risks are managed, and the why/what/how/impact business case |
-| [`references.md`](references.md) | APA 7 reference list, checked against the actual source documents |
+The ten prompts follow Hauly's operations from a message arriving to a weekly decision:
 
-## Iteration history
-
-Every prompt has a documented "v1 → v2" gap-and-fix note. Four go into full
-before/after detail because they're the strongest evidence of the process;
-the other six get a shorter version of the same thing.
-
-| Prompt | v1 problem | v2 fix |
+| Stage | Prompt | What it does |
 | --- | --- | --- |
-| 1 — Support Ticket Triage | No fixed category/urgency list — AI could invent its own labels | Locked in a fixed set of options and a strict output format |
-| 2 — Customer Support Reply Drafting | No Role/Context/Expected output — generic, over-apologetic replies | Added founder Role, brand-voice rules, and a 3-part reply structure |
-| 3 — App Store Review Responses | No rule against a defensive tone | Added "no defensive tone even if the review is unfair" |
-| 4 — Bug Report Summarisation | AI could guess at the technical cause freely | Only infer a cause with evidence; mark inferred steps clearly |
-| 5 — Feature Request Evaluation | Didn't check requests against product principles | Added an explicit "flag if it conflicts with a stated principle" step |
-| 6 — Social Media Trend Analysis | No safeguards at all — could repeat an unverified viral claim or a skewed sample uncritically | Full debiasing pass: inclusive-language rule, testing against different users, and a self-check step |
-| 7 — Circle Community Moderation | No self-check; "remove" action implied automatic removal | Added a self-check step; renamed to "recommend_remove" — always a human decision |
-| 8 — FAQ & Gazette Drafting | No fallback for an unclear "mode" — could silently guess wrong | Added an explicit "ask for clarification" fallback |
-| 9 — Push Notification Copy | Missing Role field | Explicit Role added, caught by checking all 10 prompts against RACE |
-| 10 — Weekly Trends Report | Could calculate a made-up percentage change with only one data point | Only calculate a percentage when both numbers are actually supplied |
+| Intake | [1. Support Ticket Triage](prompts/01-support-ticket-triage.md) | Sorts each support message by category, urgency and app tab |
+| Intake | [4. Bug Report Summary](prompts/04-bug-report-summarisation.md) | Turns a messy bug report into a clear ticket |
+| Response | [2. Customer Support Reply Drafting](prompts/02-customer-support-reply-drafting.md) | Drafts a reply for Holly to check and send |
+| Response | [3. Collection Ingredient Report](prompts/03-collection-ingredient-report.md) | Flags ingredient pairing cautions across a user's whole collection |
+| Planning | [5. Feature Request Scoring](prompts/05-feature-request-evaluation.md) | Scores requests against Hauly's product principles |
+| Moderation | [7. Circle Community Moderation](prompts/07-circle-community-moderation.md) | Recommends an action on a Circle post; a human decides |
+| Content planning | [6. Trend Analysis and Gazette Planning](prompts/06-social-media-trend-analysis.md) | Checks trends for evidence, bias and safety before recommending an article |
+| Content drafting | [8. FAQ and Gazette Drafting](prompts/08-faq-gazette-article-drafting.md) | Drafts help answers and approved articles |
+| Content drafting | [9. Push Notification and Banner Copy](prompts/09-push-notification-copy.md) | Writes short announcement copy |
+| Reporting | [10. Weekly Operations Report](prompts/10-weekly-trends-report.md) | Combines the week's data into one summary and recommendation |
 
-Prompt 6's refinement is the most substantial — see
-[`evaluation.md`](evaluation.md) for the full comparison and real generated
-outputs showing v1 passing along an unverified "cures acne overnight" claim
-that v2 catches and flags.
+## 3. How every prompt is built
 
-## Notes for the marker
+Every prompt uses the **RACE** structure from Topic 3, Figure 1.9 (La Trobe University, 2026):
 
-- All business-impact claims are framed as **proposed pilot targets**, not
-  measured results — see `governance-and-business-case.md`.
-- Platform character-limit figures (Prompts 3 and 9) were checked against
-  primary sources rather than assumed; see `references.md` and the relevant
-  prompt files for what was actually verified.
-- The RACE framework citation (Topic 3, Figure 1.9) was confirmed against the
-  subject PDF; one attribution detail is flagged as unconfirmed in
-  `references.md` pending a manual check.
+- **Role** — who the AI acts as
+- **Action** — what it must do
+- **Context** — the information it needs, including Hauly's real rules
+- **Expected output** — exactly what the answer should look like
+
+Giving the AI a role and describing the task precisely are among the core techniques identified in a review of prompting research (Hewing & Leinhos, 2024). The library also uses fixed answer options, word and character limits, set output formats, breaking tasks into sections, and self-checks.
+
+## 4. How the prompts were tested and improved
+
+Topic 3 recommends treating each prompt "as a hypothesis to be validated" through A/B testing. Each version of every prompt was run once on the same sample input and the outputs were compared. Where the improved version still fell short, a further version was written and tested (Prompts 1, 2 and 6 have three versions).
+
+| Prompt | What went wrong in the first version | What the final version did |
+| --- | --- | --- |
+| 1 | Made up its own labels | Split a three-issue message into three correctly labelled issues, flagged for review |
+| 2 | 231 words, several apologies, promised to tell "our team" | 66 words, no invented details, asked for the phone model and app version |
+| 3 | Gave its own pairing list and reassured users that some pairings had "No concern here" | Flagged only pairings on Hauly's list, marked unknown ingredients, added the disclaimer |
+| 4 | Invented a technical cause for the bug | Gave no cause and marked guessed steps as "(inferred)" |
+| 5 | Scored a price-comparison request 4/5 for value | Scored it 1/5 for fit and flagged a direct conflict with Hauly's no-prices principle |
+| 6 | Invented Gazette sections and ignored how weak the evidence was | Rated evidence as thin, turned outside facts into research questions (a few general statements remained) |
+| 7 | Output "remove", implying automatic deletion | Output "recommend_remove"; the self-check didn't change the decision on this post |
+| 8 | Silently guessed what kind of content to write | Asked for clarification instead of guessing |
+| 9 | Missing a Role | Role added; both versions met every rule, so no visible difference |
+| 10 | Presented guesses as facts | Separated given numbers from guesses and marked missing data |
+
+Details are in [Evaluation](evaluation.md) and in each prompt's page. Full outputs are in the [Appendix](appendix-test-outputs.md).
+
+## 5. Report contents
+
+| Document | Purpose |
+| --- | --- |
+| [prompts/](prompts/) | One page per prompt: task, problem, techniques, final prompt, improvement history, automation potential, risks |
+| [evaluation.md](evaluation.md) | Testing method and the two most detailed before-and-after comparisons |
+| [business-case-and-governance.md](business-case-and-governance.md) | Business value, risks, safeguards and limitations |
+| [references.md](references.md) | Reference list (APA 7th) |
+| [appendix-test-outputs.md](appendix-test-outputs.md) | Full AI outputs from every test |

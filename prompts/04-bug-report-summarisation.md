@@ -1,43 +1,40 @@
-# 4. Bug Report Summarisation for Dev Handoff
+# Prompt 4 — Bug Report Summary
 
-**What it does:** Turns a raw, messy user bug report into a clean,
-structured ticket ready to hand to a developer.
+**Workflow stage:** Intake
 
-**Technique used:** RACE structure, plus breaking the task into fixed
-sections (steps to reproduce, expected vs. actual behaviour, severity) so
-nothing gets missed.
+| | |
+| --- | --- |
+| **Task** | Turn a messy user bug report into a clear, structured ticket for fixing. |
+| **Problem it solves** | User bug reports are informal and incomplete. Holly has to reread them and work out the steps before any fixing can start. |
+| **Prompting techniques** | Role framing; fixed ticket sections (structured output); a rule against guessing the cause, and labelling any step the user didn't state as "(inferred)" (constraints). |
 
-> **Role:** You are converting raw user bug reports into a structured ticket for a
-> solo developer.
->
-> **Action:** Extract the details needed to action the bug without re-reading the
-> original message(s). Do not infer the technical cause of the bug unless the
-> source message provides evidence for it.
->
-> **Context:** Technology stack, if relevant and confirmed: {{tech_stack}}.
-> Message(s): "{{messages}}"
->
-> **Expected output:** Steps to reproduce (numbered, inferred if not explicit —
-> mark inferred steps with "(inferred)"); expected vs actual behaviour; device/OS
-> details if mentioned, else "not provided"; suspected affected tab/feature;
-> severity guess (cosmetic / functional / blocking) with one-sentence reasoning.
+## Final prompt (v2)
 
-**v1 → v2 note:** An earlier version let the AI guess at the technical cause
-of the bug freely. That's risky — a confident-sounding but wrong diagnosis
-could send a developer down the wrong path. The fix was a direct rule: only
-infer a cause if the user's message actually gives evidence for it, and mark
-any inferred reproduction steps as "(inferred)" rather than stating them as
-fact.
+> Role: You are turning raw user bug reports into a structured ticket for a solo developer.
+> Action: Pull out the details needed to fix the bug without re-reading the original message. Do not guess the technical cause unless the message gives evidence for it.
+> Context: Hauly is an iPhone app. Message: "{{message}}"
+> Expected output: Steps to reproduce (numbered; if a step is not stated by the user, mark it "(inferred)"); expected vs actual behaviour; device details if mentioned, otherwise "not provided"; affected tab/feature; severity (cosmetic / functional / blocking) with one sentence of reasoning.
 
-**Why it matters:** Switching between the support inbox and the codebase is
-expensive for a solo developer, and raw user language rarely maps neatly to
-a workable ticket.
+Words in `{{double brackets}}` are filled in each time the prompt is used.
 
-**How much can run on its own:** High — this is meant to save time on every
-bug report, and gives a consistent ticket format for whatever backlog tool
-is used.
+## How the prompt was improved
 
-**Watch out for:** Inferred steps could be wrong, and are labelled as such
-rather than stated as fact; severity still needs a human sanity-check before
-prioritising. The tech stack is only used if confirmed — naming an unconfirmed
-stack risks a false-confidence diagnosis the AI can't actually verify.
+All versions were tested on the same sample message (written for testing, based on real Hauly features): *"since the last update whenever i use scan ingredients on a product it just shows a spinning wheel forever then goes back to my haul. i have like 200 products in there. iphone"*
+
+**v1** — asked for a "likely technical cause" as one of the sections.
+- **Result:** it wrote a detailed cause — "the recent update introduced a breaking change to the ingredient-scan API call or response parsing" — plus a second theory about the 200 products. None of this came from the user's message. It also listed steps the user never described, without saying they were guesses.
+
+**v2 (final)** — removed the cause section, banned guessing the cause without evidence, and required unstated steps to be marked "(inferred)".
+- **Result:** no cause was given. The first two steps were marked "(inferred)", phone model and iOS version were listed as "not provided", and the 200 products were noted with "relevance to bug not confirmed".
+
+Full test outputs: [Appendix — Prompt 4](../appendix-test-outputs.md#prompt-4).
+
+## Automation potential
+
+**High.** This can run on every bug report, because a person still reads the ticket before any work starts.
+
+## Risks and limitations
+
+- Steps marked "(inferred)" can be wrong.
+- Severity is a first guess and needs checking before deciding what to fix first.
+- The AI can't see the app's code, so it can't diagnose problems — which is why it is told not to try.

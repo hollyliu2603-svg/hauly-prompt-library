@@ -1,59 +1,42 @@
-# 9. Push Notification & Announcement Copywriter
+# Prompt 9 — Push Notification and Banner Copy
 
-**What it does:** Drafts a push notification and a matching in-app banner
-for one announcement, in Hauly's voice.
+**Workflow stage:** Content drafting
 
-**Technique used:** RACE structure, with length and tone rules built in.
+| | |
+| --- | --- |
+| **Task** | Write a push notification and an in-app banner for one announcement. |
+| **Problem it solves** | Announcements need to go out quickly and sound like Hauly, without a copywriter. |
+| **Prompting techniques** | Role framing; character and word limits, and a ban on pushy sales language (constraints); fixed output format (structured output). |
 
-## v1 (first draft)
+## Final prompt (v2)
 
-> **Action:** Write a push notification and an in-app banner for the announcement
-> below.
->
-> **Context:** Hauly's brand voice: plain, warm, never salesy. Announcement:
-> "{{announcement}}"
->
-> **Expected output:** Keep the push notification concise, targeting a maximum
-> of 40 characters for readability. Banner max 25 words. No exclamation mark
-> stacking, no urgency/FOMO language ("don't miss out", "limited time"). Output
-> as: `{"push": "...", "banner": "..."}`
+> Role: You are Hauly's in-house copywriter, writing announcement copy for users.
+> Action: Write a push notification and an in-app banner for the announcement below.
+> Context: Hauly's voice: plain, warm, never salesy. Announcement: "{{announcement}}"
+> Expected output: Push notification of no more than 40 characters. Banner no more than 25 words. No stacked exclamation marks, no urgency or fear-of-missing-out language ("don't miss out", "limited time"). Output as: {"push": "...", "banner": "..."}
 
-**Problem with v1:** No stated Role at all — it just opened with an
-instruction. Every other prompt in the library states a Role explicitly;
-this got caught only by checking all 10 prompts against the RACE framework
-side by side.
+Words in `{{double brackets}}` are filled in each time the prompt is used.
 
-## v2 (fixed — Role added)
+## How the prompt was improved
 
-> **Role:** You are Hauly's in-house copywriter, writing user-facing announcement
-> copy.
->
-> **Action:** Write a push notification and an in-app banner for the announcement
-> below.
->
-> **Context:** Hauly's brand voice: plain, warm, never salesy. Announcement:
-> "{{announcement}}"
->
-> **Expected output:** Keep the push notification concise, targeting a maximum
-> of 40 characters for readability. Banner max 25 words. No exclamation mark
-> stacking, no urgency/FOMO language ("don't miss out", "limited time"). Output
-> as: `{"push": "...", "banner": "..."}`
+All versions were tested on the same sample message (written for testing, based on real Hauly features): *"New in Hauly: scan the ingredients list on any product and get a plain-English Ingredient Report (a Hauly Plus feature)."*
 
-A small fix, but a real example of using a structural framework (RACE) to
-catch a gap that reading the prompt on its own didn't reveal.
+**v1** — had no Role. The gap was found by checking all ten prompts against the RACE structure.
 
-**Why it matters:** Marketing copy for feature launches or reminders needs
-to go out quickly and consistently, without a copywriter on staff.
+**v2 (final)** — added the Role.
 
-**How much can run on its own:** High — low-risk, high-frequency task, though
-still worth a quick check for tone before publishing.
+**Test results:**
+- **v1:** push *"Scan ingredients, get plain English"* (35 characters); banner 17 words.
+- **v2:** push *"Scan a label for a plain-English report"* (39 characters); banner 18 words.
+- Both met every rule. **Adding the Role made no visible difference in this test.** The change keeps the prompt consistent with the RACE structure; it is not evidence of better copy.
 
-**Watch out for:** Left unconstrained, an AI defaults to generic
-app-marketing tone (urgency, exclamation marks) — hence the explicit rule
-against it. Also — I checked the "40 characters" figure against actual
-platform behaviour: no platform enforces one single hard limit for push
-notifications; it depends on the device and OS. Rough real-world guidance:
-iOS titles show in full up to about 25–50 characters (bodies cut off around
-150), Android titles up to about 65 (bodies around 240). 40 is used here as
-a safely-short shared target, not a documented rule, and is worth checking
-on the actual devices before publishing.
+Full test outputs: [Appendix — Prompt 9](../appendix-test-outputs.md#prompt-9).
+
+## Automation potential
+
+**High.** A low-risk, frequent task — a quick tone check before sending is enough.
+
+## Risks and limitations
+
+- **Length limit:** 40 characters is a chosen target, not a platform rule. How much text shows depends on the device and whether images are used. CleverTap (n.d.) and Reteno (n.d.) suggest iOS titles of about 25–50 characters and Android titles of up to 65, so 40 keeps the text short enough for both.
+- **Paid features:** announcements about a Hauly Plus feature must say so clearly, so free users aren't misled.

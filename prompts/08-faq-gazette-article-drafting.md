@@ -1,47 +1,39 @@
-# 8. FAQ & Gazette Article Drafting
+# Prompt 8 — FAQ and Gazette Drafting
 
-**What it does:** Drafts one short piece of copy — either a self-serve FAQ
-answer from a resolved support thread, or a Gazette article from an idea
-Prompt 6 has already approved.
+**Workflow stage:** Content drafting
 
-**Technique used:** RACE structure, with a "mode" switch (FAQ or GAZETTE) so
-one prompt can safely handle two different writing jobs instead of guessing
-which one is meant.
+| | |
+| --- | --- |
+| **Task** | Draft either a help FAQ answer from a resolved support thread, or a Gazette article from an idea Prompt 6 has approved. |
+| **Problem it solves** | Answering the same question again and again, and writing articles from a blank page, both take up Holly's time. |
+| **Prompting techniques** | Role framing; a mode switch so one prompt handles two jobs; a "stop and ask" rule when the mode is missing (constraint); word limits (structured output). |
 
-> **Role:** You are Hauly's support and editorial writer.
->
-> **Action:** Draft content in the mode specified by {{mode}} (FAQ or GAZETTE).
-> If {{mode}} is missing or does not match either option, return
-> `needs_clarification` and do not draft any content.
->
-> **Context:** Hauly's voice throughout: plain language, no jargon, no retail
-> framing, product descriptions/explanations under 50 words per section. Mode:
-> {{mode}}. Source material: "{{source_material}}" — for FAQ mode, a resolved
-> support thread; for GAZETTE mode, an approved Prompt 6 content recommendation
-> with title/angle/target reader/learning points already supplied.
->
-> **Expected output:** For FAQ mode — a user-facing question (as they'd actually
-> search it), a short answer (under 100 words total), one "related tip" if
-> relevant. For GAZETTE mode — a short article draft (under 300 words) following
-> the supplied title, angle, and three key learning points, ending with one
-> practical takeaway for the reader. In both modes, this is a draft only — it is
-> not published or sent until the founder has verified accuracy and approved it.
+## Final prompt (v2)
 
-**v1 → v2 note:** The first version of this prompt didn't have a fallback for
-a missing or unclear mode — it would just guess whether to write an FAQ or a
-Gazette article, which risked silently doing the wrong one. Adding the
-explicit `needs_clarification` fallback means it now asks rather than
-guesses.
+> Role: You are Hauly's support and editorial writer.
+> Action: Draft content in the mode given (FAQ or GAZETTE). If the mode is missing or is not one of these, reply only with `needs_clarification` and do not draft anything.
+> Context: Hauly's voice: plain language, no jargon, no shopping language. Mode: {{mode}}. Source material: "{{source_material}}" — FAQ mode uses a resolved support thread; GAZETTE mode uses an approved Prompt 6 recommendation with title, angle, target reader and learning points.
+> Expected output: FAQ mode — a question written the way a user would search it, a short answer (under 100 words), and one related tip only if it comes from the source material. GAZETTE mode — an article draft under 300 words following the supplied title, angle and three learning points, ending with one practical takeaway. Either way, this is a draft only and is not published until the founder has checked and approved it.
 
-**Why it matters:** Two repeat writing jobs — answering the same support
-question over and over, and turning an approved idea into copy — both
-currently mean starting from a blank page every time.
+Words in `{{double brackets}}` are filled in each time the prompt is used.
 
-**How much can run on its own:** High for drafting; every resolved ticket
-becomes a candidate FAQ, and every approved Prompt 6 idea becomes a
-candidate article.
+## How the prompt was improved
 
-**Watch out for:** Needs a human check before publishing either way — an FAQ
-mode risks locking in a wrong or outdated answer as "official," and a
-Gazette draft only inherits whatever safety checks Prompt 6 already did, so
-this should never run on a Prompt 6 idea that hasn't cleared that review.
+Both versions were tested on the same sample support thread (written for testing, based on Hauly's real "Move to restock" button), with the mode deliberately left blank: *"Resolved support thread: A user asked how to move a finished product from their Haul to Restock. Answer given: in Haul, select the product, then tap 'Move to restock'."*
+
+**v1** — no rule for a missing mode.
+- **Result:** it silently chose FAQ mode and wrote a full draft, without saying it had guessed.
+
+**v2 (final)** — told it to reply only with `needs_clarification` if the mode is missing.
+- **Result:** it replied only with `needs_clarification` and wrote nothing else.
+
+Full test outputs: [Appendix — Prompt 8](../appendix-test-outputs.md#prompt-8).
+
+## Automation potential
+
+**High** for drafting. Every FAQ and article is checked and approved by Holly before publishing.
+
+## Risks and limitations
+
+- An FAQ can lock in an answer that goes out of date when the app changes.
+- A Gazette draft only inherits the checks Prompt 6 already did, so it should never be used on an idea Prompt 6 hasn't approved.
