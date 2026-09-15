@@ -1,6 +1,6 @@
 # Business Case and Responsible Use
 
-This section follows the why–what–how–impact model from Topic 3 (La Trobe University, 2026) for a business case, then covers risks, safeguards and limitations.
+This section follows the why–what–how–impact model from Module 1, Topic 3 (La Trobe University, 2026) for a business case, then covers risks, safeguards and limitations.
 
 ## 1. Why change?
 
@@ -8,13 +8,13 @@ Hauly has one founder doing every operational job: answering support, sorting bu
 
 ## 2. What is the solution?
 
-A library of ten tested prompts, one for each repeating job (see the [workflow table](README.md#2-the-workflow)). Topic 3 describes prompt libraries as giving each automated workflow "a consistent, high-quality starting point". Each prompt:
+A library of ten tested prompts, one for each repeating job (see the [workflow table](README.md#2-the-workflow)). Module 1, Topic 3 describes prompt libraries as giving each automated workflow "a consistent, high-quality starting point". Each prompt:
 
 - produces the same structure every time, so results can be compared and tracked
 - has Hauly's real rules built in — no prices or shopping features, @usernames only, "lookalike" not "dupe", and Hauly's own ingredient pairing list
 - says clearly what the AI must **not** do (guess causes, invent facts, remove posts, publish content)
 
-The prompts **support** Holly rather than replace judgement. As Topic 3 puts it, workflow automation "is not about replacing humans but about augmenting human performance".
+The prompts **support** Holly rather than replace judgement. As Module 1, Topic 3 puts it, workflow automation "is not about replacing humans but about augmenting human performance".
 
 ## 3. How would it be put in place?
 
@@ -24,7 +24,7 @@ The prompts **support** Holly rather than replace judgement. As Topic 3 puts it,
 
 **Step 3 — Higher-risk judgement prompts, with extra checks:** Prompts 3 (ingredient report), 6 (trend analysis) and 7 (moderation). These deal with skincare information, possible misinformation, and other users' posts.
 
-**Human-in-the-loop rules (Topic 3 "escalation"):**
+**Human-in-the-loop rules (Module 1, Topic 3 "escalation"):**
 
 | Situation | What happens |
 | --- | --- |
@@ -51,12 +51,12 @@ The prompts **support** Holly rather than replace judgement. As Topic 3 puts it,
 
 ## 5. Risks and safeguards
 
-Topic 3 identifies three main risks of automating work with AI — hallucinations, bias and over-reliance — and three governance tools: audits, escalation and training. It also asks business cases to acknowledge data leakage.
+Module 1, Topic 3 identifies three main risks of automating work with AI — hallucinations, bias and over-reliance — and three governance tools: audits, escalation and training. It also asks business cases to acknowledge data leakage.
 
 | Risk | Where it showed up in testing | Safeguard in the prompts | Ongoing control |
 | --- | --- | --- | --- |
 | **Made-up information** ("hallucination") | Invented team (Prompt 2), invented bug cause (Prompt 4), invented app sections and outside facts (Prompt 6), guesses as facts (Prompt 10) | "Use only the facts given" rules; "(inferred)", "not provided" and "research questions" labels | Monthly check of a sample of outputs against the source messages |
-| **Bias** | First version of Prompt 6 didn't check who a trend leaves out | Inclusive-language rule, testing against five types of users, and a self-check (Topic 3 debiasing techniques); consistency self-check in Prompt 7 | Review how often moderation decisions are overruled, and for which types of posts |
+| **Bias** | First version of Prompt 6 didn't check who a trend leaves out | Inclusive-language rule, testing against five types of users, and a self-check (Module 1, Topic 3 debiasing techniques); consistency self-check in Prompt 7 | Review how often moderation decisions are overruled, and for which types of posts |
 | **Trusting the AI too much** ("over-reliance") | First version of Prompt 7 output "remove" | Nothing is sent, published or removed without Holly's approval | Keep the approval step even when outputs look reliable |
 | **Privacy and data leakage** | Support messages and Circle posts contain personal information about users and others (e.g. a real name in the Prompt 7 test post) | Only the message text is used — no email addresses, payment details or account IDs | Only use AI tools whose data terms are suitable for user data |
 | **Health-related misinformation** | First version of Prompt 3 reassured users that some pairings had "No concern here" | Hauly's own pairing list only, no "safe" claims, required disclaimer | Pairing list reviewed before any change |

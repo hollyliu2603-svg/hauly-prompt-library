@@ -28,7 +28,7 @@ The ten prompts follow Hauly's operations from a message arriving to a weekly de
 
 ## 3. How every prompt is built
 
-Every prompt uses the **RACE** structure from Topic 3, Figure 1.9 (La Trobe University, 2026):
+Every prompt uses the **RACE** structure from Module 1, Topic 3, Figure 1.9 (La Trobe University, 2026):
 
 - **Role** — who the AI acts as
 - **Action** — what it must do
@@ -39,7 +39,7 @@ Giving the AI a role and describing the task precisely are among the core techni
 
 ## 4. How the prompts were tested and improved
 
-Topic 3 recommends treating each prompt "as a hypothesis to be validated" through A/B testing. Each version of every prompt was run once on the same sample input and the outputs were compared. Where the improved version still fell short, a further version was written and tested (Prompts 1, 2 and 6 have three versions).
+Module 1, Topic 3 recommends treating each prompt "as a hypothesis to be validated" through A/B testing. Each version of every prompt was run once on the same sample input and the outputs were compared. Where the improved version still fell short, a further version was written and tested (Prompts 1, 2 and 6 have three versions).
 
 | Prompt | What went wrong in the first version | What the final version did |
 | --- | --- | --- |

@@ -6,7 +6,7 @@
 | --- | --- |
 | **Task** | Assess social media trends that Holly has collected, and recommend whether any should become an article in the Gazette (Hauly's in-app editorial section). |
 | **Problem it solves** | Beauty trends often come with exaggerated claims and one narrow beauty standard. Choosing topics without checking can spread misinformation or leave many users out. |
-| **Prompting techniques** | Role framing; a seven-section structure (decomposition); a "use only supplied information" rule (constraint); the three debiasing techniques from Topic 3 (La Trobe University, 2026) — inclusive-language guidance, testing the idea against different types of users (counterfactual prompting), and a self-check (self-critique). |
+| **Prompting techniques** | Role framing; a seven-section structure (decomposition); a "use only supplied information" rule (constraint); the three debiasing techniques from Module 1, Topic 3 (La Trobe University, 2026) — inclusive-language guidance, testing the idea against different types of users (counterfactual prompting), and a self-check (self-critique). |
 
 ## Final prompt (v3)
 

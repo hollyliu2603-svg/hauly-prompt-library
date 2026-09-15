@@ -6,7 +6,7 @@ CleverTap. (n.d.). *What are push notification character limits?* Retrieved Sept
 
 Hewing, M., & Leinhos, V. (2024). *The Prompt Canvas: A literature-based practitioner guide for creating effective prompts in large language models*. arXiv. https://arxiv.org/abs/2412.05127
 
-La Trobe University. (2026). *BUS4005 Topic 3: Embedding AI into business workflows* [Course materials]. La Trobe University.
+La Trobe University. (2026). *BUS4005 Module 1: Generative AI workflows for business — Topic 3: Embedding AI into business workflows* [Course materials]. La Trobe University.
 
 Ouyang, L., Wu, J., Jiang, X., Almeida, D., Wainwright, C. L., Mishkin, P., Zhang, C., Agarwal, S., Slama, K., Ray, A., Schulman, J., Hilton, J., Kelton, F., Miller, L., Simens, M., Askell, A., Welinder, P., Christiano, P., Leike, J., & Lowe, R. (2022). *Training language models to follow instructions with human feedback*. arXiv. https://arxiv.org/abs/2203.02155
 

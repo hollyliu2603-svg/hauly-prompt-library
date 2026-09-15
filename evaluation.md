@@ -2,7 +2,7 @@
 
 ## How testing worked
 
-Topic 3 (La Trobe University, 2026) describes treating each prompt "as a hypothesis to be validated", measured on outcomes such as accuracy, consistency, readability and alignment with business criteria. This library followed that approach:
+Module 1, Topic 3 (La Trobe University, 2026) describes treating each prompt "as a hypothesis to be validated", measured on outcomes such as accuracy, consistency, readability and alignment with business criteria. This library followed that approach:
 
 1. **Write a first version (v1)** of each prompt.
 2. **Test it** on a sample input written to reflect real Hauly features.
@@ -53,4 +53,4 @@ The two comparisons below show the process in the most detail.
 | Bias check across different users | Noted the skin-tone skew only | Five user checks | Five user checks |
 | Facts not in the input | Invented Gazette sections | Several (e.g. slugging is "a widely known, long-standing skincare technique") | Mostly turned into research questions; a few general statements remained |
 
-**What this shows:** the three debiasing techniques from Topic 3 — inclusive-language guidance, counterfactual prompting (testing against different types of users) and self-critique — gave v2 and v3 a structured check for bias and safety that v1 lacked. Research on large language models warns that internet-based training data can "encode biases potentially damaging to marginalized populations" (Bender et al., 2021, p. 610), which is why this prompt tests its recommendation against a range of users rather than assuming one beauty standard. v3 also shows the limits of prompting: a rule reduced invented facts but did not remove them all, so a human fact-check remains necessary.
+**What this shows:** the three debiasing techniques from Module 1, Topic 3 — inclusive-language guidance, counterfactual prompting (testing against different types of users) and self-critique — gave v2 and v3 a structured check for bias and safety that v1 lacked. Research on large language models warns that internet-based training data can "encode biases potentially damaging to marginalized populations" (Bender et al., 2021, p. 610), which is why this prompt tests its recommendation against a range of users rather than assuming one beauty standard. v3 also shows the limits of prompting: a rule reduced invented facts but did not remove them all, so a human fact-check remains necessary.
