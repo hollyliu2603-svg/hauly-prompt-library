@@ -8,7 +8,7 @@ Module 1, Topic 3 (La Trobe University, 2026) describes treating each prompt "as
 2. **Test it** on a sample input written to reflect real Hauly features.
 3. **Find what went wrong** in the output.
 4. **Fix the prompt (v2)** and test it on the *same* input, so the two outputs can be compared fairly.
-5. **Repeat (v3, v4)** where the new version still fell short — Prompts 1, 2 and 7 reached v4, and Prompts 5 and 6 reached v3 (the last versions of Prompts 5 and 7 were a maintenance re-test after correcting the first-name wording).
+5. **Repeat (v3, v4)** where the new version still fell short — Prompts 1, 2 and 7 reached v4, and Prompts 5, 6 and 8 reached v3 (the last versions of Prompts 5 and 7 were a maintenance re-test after correcting the first-name wording).
 
 All tests were run in September 2026 using Claude Sonnet 5, with no other instructions added. The maintenance re-tests of Prompts 5 and 7 were run through the Claude Code command line, which adds a short identity line, the date and the account email; re-running the previous versions in that setup gave the same results. Each version was run once. Because AI outputs vary from run to run, one run shows what the prompt *can* produce, not what it will produce every time.
 
@@ -27,7 +27,7 @@ To check the results weren't specific to one model, the first and/or final versi
 | 5 (V1, V3) | V1 scored value 4/5; V3 scored fit 1/5 and flagged the conflict (same in two runs each) | Build-effort score changed between runs |
 | 6 (V2, V3) | — | Used "emerging"/"established" on one-video evidence, marked ice rolling "suitable for founder review", and stated many outside facts |
 | 7 (V1, V4) | V1 said "remove"; V4 flagged both rules and required human review | V1 missed the real name; V4 chose `flag_for_review` instead of `recommend_remove` |
-| 8 (V1, V2) | V1 guessed the mode | **V2 failed:** drafted an FAQ instead of replying `needs_clarification`; both added tips not in the source |
+| 8 (V1, V2, V3) | V1 guessed the mode; V3 replied only `needs_clarification` | **V2 failed:** drafted an FAQ instead of replying `needs_clarification`, which led to V3 |
 | 9 (V1, V2) | Both met every rule; the Role made no visible difference | — |
 | 10 (V1, V2) | V2 invented no numbers and marked missing sections | **V1 invented last week's bug count** (the problem V2 fixes); V2 recommended three actions instead of one |
 

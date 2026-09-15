@@ -12,7 +12,7 @@ Answering the same question again and again, and writing articles from a blank p
 
 ## Prompting techniques
 
-Role framing; a mode switch so one prompt handles two jobs; a "stop and ask" rule when the mode is missing (constraint); word limits (structured output).
+Role framing; a mode switch so one prompt handles two jobs; a "stop and ask" rule when the mode is missing, placed as a separate first step (constraint and decomposition); word limits (structured output).
 
 ## Automation potential
 
@@ -28,17 +28,20 @@ Role framing; a mode switch so one prompt handles two jobs; a "stop and ask" rul
 | Version | What changed | What to notice in the response |
 | --- | --- | --- |
 | V1 | No rule for a missing mode | Silently chooses FAQ mode and writes a full draft without saying it guessed |
-| V2 (final) | Adds: reply only `needs_clarification` if the mode is missing | Replies only `needs_clarification` |
+| V2 | Adds: reply only `needs_clarification` if the mode is missing | Claude Sonnet 5 replies only `needs_clarification` — but GPT-4.1 mini ignored the rule and wrote a draft (see Prompt Lab check) |
+| V3 (final) | Moves the mode check to its own first step: the whole reply must be `needs_clarification`, and drafting only happens in step 2 | Both Claude Sonnet 5 and GPT-4.1 mini replied only `needs_clarification`; with the mode set to FAQ, it still drafted normally |
 
-**Discussion:** Both versions used the same thread with the mode deliberately left blank, testing what happens when an input is missing.
+**Discussion:** All versions used the same thread with the mode deliberately left blank, testing what happens when an input is missing. V3 was written because V2 failed on GPT-4.1 mini: the stop rule was buried in the middle of the instructions. Making the check a separate first step fixed it on both models. An extra run with the mode set to FAQ confirmed that V3 still drafts when the mode is valid — without it, a prompt that always replies `needs_clarification` would also "pass" the blank-mode test.
 
-## Final prompt — reusable template (V2)
+## Final prompt — reusable template (V3)
 
 > **Role:** You are Hauly's support and editorial writer.  
 >
-> **Action:** Draft content in the mode given (FAQ or GAZETTE). If the mode is missing or is not one of these, reply only with `needs_clarification` and do not draft anything.  
+> **Step 1 — check the mode first.** Mode: {{mode}}. The mode must be exactly FAQ or GAZETTE. If it is blank, missing, or anything else, your whole reply must be the single word: needs_clarification. Stop there and do not write anything else.  
 >
-> **Context:** Hauly's voice: plain language, no jargon, no shopping language. Mode: {{mode}}. Source material: "{{source_material}}" — FAQ mode uses a resolved support thread; GAZETTE mode uses an approved Prompt 6 recommendation with title, angle, target reader and learning points.  
+> **Step 2 —** only if the mode is FAQ or GAZETTE, draft the content below.  
+>
+> **Context:** Hauly's voice: plain language, no jargon, no shopping language. Source material: "{{source_material}}" — FAQ mode uses a resolved support thread; GAZETTE mode uses an approved Prompt 6 recommendation with title, angle, target reader and learning points.  
 >
 > **Expected output:** FAQ mode — a question written the way a user would search it, a short answer (under 100 words), and one related tip only if it comes from the source material. GAZETTE mode — an article draft under 300 words following the supplied title, angle and three learning points, ending with one practical takeaway. Either way, this is a draft only and is not published until the founder has checked and approved it.  
 
@@ -77,7 +80,7 @@ Expected output: FAQ mode — a question written the way a user would search it,
 *Draft only — pending founder review and approval before publishing.*
 ~~~
 
-### V2 (final)
+### V2
 
 **Prompt text (as tested)**
 
@@ -94,20 +97,55 @@ Expected output: FAQ mode — a question written the way a user would search it,
 needs_clarification
 ~~~
 
+### V3 (final)
+
+**Prompt text (as tested)**
+
+~~~text
+Role: You are Hauly's support and editorial writer.
+Step 1 — check the mode first. Mode: . The mode must be exactly FAQ or GAZETTE. If it is blank, missing, or anything else, your whole reply must be the single word: needs_clarification. Stop there and do not write anything else.
+Step 2 — only if the mode is FAQ or GAZETTE, draft the content below.
+Context: Hauly's voice: plain language, no jargon, no shopping language. Source material: "Resolved support thread: A user asked how to move a finished product from their Haul to Restock. Answer given: in Haul, select the product, then tap 'Move to restock'." — FAQ mode uses a resolved support thread; GAZETTE mode uses an approved Prompt 6 recommendation with title, angle, target reader and learning points.
+Expected output: FAQ mode — a question written the way a user would search it, a short answer (under 100 words), and one related tip only if it comes from the source material. GAZETTE mode — an article draft under 300 words following the supplied title, angle and three learning points, ending with one practical takeaway. Either way, this is a draft only and is not published until the founder has checked and approved it.
+~~~
+
+**Recorded response**
+
+~~~text
+needs_clarification
+~~~
+
+### Extra check — V3 with a valid mode (FAQ)
+
+The same V3 prompt was run with `Mode: FAQ`, to confirm it still drafts when the mode is valid.
+
+**Recorded response**
+
+~~~text
+**Q: How do I move a finished product from my Haul to Restock?**
+
+**A:** Open your Haul, select the product you've finished, then tap "Move to restock." It will now appear in your Restock list.
+
+*Note: This is a draft only and is not published until the founder has checked and approved it.*
+~~~
+
+The draft follows the source and, as the source gave no tip, includes none. It adds "It will now appear in your Restock list", which is a reasonable reading of "Move to restock" but not stated in the source, so it still needs Holly's check.
+
 ## Prompt Lab check (GPT-4.1 mini)
 
 To check the results weren't specific to one AI model, the first and final versions were re-run in La Trobe Prompt Lab using GPT-4.1 mini, with exactly the same prompt text. Prompt Lab's prompt review scores the prompt itself out of 100.
 
-**What GPT-4.1 mini did — the final version failed on this model:**
+**What GPT-4.1 mini did — V2 failed on this model, which led to V3:**
 
 | Version | Result | Compared with Claude Sonnet 5 |
 | --- | --- | --- |
 | V1 | Silently chose FAQ mode and wrote a draft; its tip mentioned "items still in transit", which is not in the source material | Same problem, plus an invented tip |
-| V2 (final) | **Ignored the rule:** with the mode blank, it still wrote an FAQ draft instead of replying only `needs_clarification`; its tip ("Make sure you select the correct product…") was also not from the source | **Different** — Claude Sonnet 5 replied only `needs_clarification` |
+| V2 | **Ignored the rule:** with the mode blank, it still wrote an FAQ draft instead of replying only `needs_clarification`; its tip ("Make sure you select the correct product…") was also not from the source | **Different** — Claude Sonnet 5 replied only `needs_clarification` |
+| V3 (final) | Replied only `needs_clarification` | Same — the fix worked on both models |
 
-- **Prompt Lab review:** V1 scored 82.25/100 and did not point out that the mode was missing. V2 scored 83.5/100 and suggested making the handling of a missing mode more explicit — which matches what went wrong.
+- **Prompt Lab review:** V1 scored 82.25/100 and did not point out that the mode was missing. V2 scored 83.5/100 and suggested making the handling of a missing mode more explicit — which matches what went wrong. V3 scored lower, 78.25/100, mainly because the review found the blank "Mode: ." line confusing — but that blank line is the test itself, and V3 was the only version to handle it correctly on GPT-4.1 mini.
 
-**What this adds:** this is the clearest example in the library of a prompt that works on one model and fails on another. A possible next version would put the mode check first, as its own step, before any drafting instructions. That version was not tested, so it is not part of the final prompt. Until then, Holly's review before publishing is the safeguard.
+**What this adds:** this is the clearest example in the library of a prompt that worked on one model and failed on another — and of a fix found by testing. Moving the stop rule into its own first step made both models follow it. It also shows the review score is not a guide to output quality: the version that worked best scored lowest.
 
 ### Prompt Lab — V1
 
@@ -139,7 +177,7 @@ Top Improvements
 * Clarify the source material and content boundaries for GAZETTE mode to reduce hallucination risk.
 ~~~
 
-### Prompt Lab — V2 (final)
+### Prompt Lab — V2
 
 **Recorded response (GPT-4.1 mini)**
 
@@ -165,4 +203,28 @@ Top Improvements
 * Clarify the handling of the mode input, explicitly stating what valid modes are and how to respond if missing or invalid.
 * Separate instructions, examples, and expected output formats more clearly for easier understanding.
 * Add explicit instructions on how to handle the "related tip" in FAQ mode, especially if the source material does not contain one.
+~~~
+
+### Prompt Lab — V3 (final)
+
+**Recorded response (GPT-4.1 mini)**
+
+~~~text
+needs_clarification
+~~~
+
+**Prompt Lab review:** overall score 78.25/100
+
+~~~text
+Rubric Scores
+* Clarity: 70/100 - The prompt is mostly clear but the initial instruction about checking the mode is somewhat confusing due to the placeholder "Mode: ." and the abrupt transition to the next step.
+* Constraints: 85/100 - The prompt sets clear constraints on mode values, output length, style, and content source, but could better specify formatting expectations.
+* Structure: 75/100 - The prompt is logically structured in steps but could benefit from clearer separation and labeling of instructions for each mode.
+* Verifiability: 80/100 - The prompt references specific source material and expected output formats, aiding verifiability, but the vague "Mode: ." line reduces confidence.
+* Hallucination Risk: 90/100 - The prompt limits content generation to provided source material and specific modes, reducing hallucination risk effectively.
+Overall score: 78.25/100
+Top Improvements
+* Clarify the "Mode: ." line to explicitly indicate where the mode value is provided or how it is input.
+* Separate instructions for FAQ and GAZETTE modes more distinctly to avoid confusion.
+* Specify formatting or output structure more explicitly, such as how to present the question, answer, tips, or article sections.
 ~~~

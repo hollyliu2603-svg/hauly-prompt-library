@@ -68,7 +68,7 @@ Module 1, Topic 3 identifies three main risks of automating work with AI — hal
 ## 6. Limitations
 
 - **Testing was small.** Each version was run once on one sample input (plus a cross-check on GPT-4.1 mini for all ten prompts). AI outputs vary, so larger testing is needed before relying on any prompt.
-- **Results differ between AI models.** In Prompt Lab, GPT-4.1 mini followed some rules less closely than Claude Sonnet 5 — for example, Prompt 8 wrote a draft instead of asking for the missing mode, Prompt 6 marked the ice-rolling trend "suitable for founder review", and Prompt 2 hinted at data recovery. Any change of model should be followed by re-testing.
+- **Results differ between AI models.** In Prompt Lab, GPT-4.1 mini followed some rules less closely than Claude Sonnet 5 — for example, Prompt 8's second version wrote a draft instead of asking for the missing mode (fixed in its third version), Prompt 6 marked the ice-rolling trend "suitable for founder review", and Prompt 2 hinted at data recovery. Any change of model should be followed by re-testing.
 - **Prompt review scores are not proof.** Prompt Lab's review scored all tested prompts 72–91.5/100, including prompts whose outputs broke their own rules.
 - **Sample inputs, not real data.** Test messages were written to match real Hauly features. Real user messages may be messier or more varied.
 - **Rules reduce mistakes but don't remove them.** Prompt 6's final version still included a few outside statements, and Prompt 7's self-check was not proven to change decisions.
