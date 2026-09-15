@@ -142,39 +142,39 @@ Beyond the principle conflict, this would require integrating real-time retailer
 
 To check the results weren't specific to one AI model, the first and final versions were re-run in La Trobe Prompt Lab using GPT-4.1 mini, with exactly the same prompt text. Prompt Lab's prompt review scores the prompt itself out of 100.
 
-**What GPT-4.1 mini did:**
+**What GPT-4.1 mini did:** each version was run twice in separate chats; the results below are from the second run, and the first run gave the same key scores.
 
 | Version | Result | Compared with Claude Sonnet 5 |
 | --- | --- | --- |
-| V1 | Demand 4, **value 4**, build effort High; said prices and cheapest restock options "would significantly enhance the Restock feature's usefulness" and suggested "partnerships with retailers" — never noticed Hauly has no prices or shopping features | Same problem |
-| V3 (final) | Demand 4, **fit 1**, build effort Medium; flagged that the feature "conflicts directly with Hauly's principle of avoiding prices and shopping features" | Same key result; demand and build effort scores differed (Claude: demand 3, effort High) |
+| V1 | Demand 4, **value 4**, build effort High; said prices and cheapest restock locations "would significantly enhance the app's utility" and mentioned "partnerships, or third-party APIs" — never noticed Hauly has no prices or shopping features (first run: the same scores) | Same problem |
+| V3 (final) | Demand 4, **fit 1**, build effort High; flagged that the feature "directly conflicts with the principle of no prices or shopping features" (first run: fit 1, but build effort Medium) | Same key result; the build-effort score changed between runs |
 
-- **Prompt Lab review:** V1 scored 82.25/100 and V3 scored 85.25/100. The V1 review did **not** notice the missing product principles — the reason V1 failed — and its suggested rewrite still asked for "overall value". The review judges how clearly a prompt is written, not whether it fits the business.
+- **Prompt Lab review:** V1 scored 83.25/100 (first run 82.25) and V3 scored 85.25/100 (both runs). The V1 reviews did **not** notice the missing product principles — the reason V1 failed — so the review judges how clearly a prompt is written, not whether it fits the business. One V3 suggestion was to "explicitly instruct the assistant to flag conflicts", but the prompt already says "Clearly flag any conflict with a product principle", so this was not applied.
 
 ### Prompt Lab — V1
 
 **Recorded response (GPT-4.1 mini)**
 
 ~~~text
-User Demand: 4 – Requested by 14 users this month, indicating a strong interest though not yet a majority.  
-Overall Value: 4 – Showing prices and cheapest restock options would significantly enhance the Restock feature’s usefulness and user satisfaction.  
-Build Effort: High – Integrating price comparison and sourcing data likely requires complex backend work and partnerships with retailers or scraping multiple data sources.
+User demand: 4 – Requested by 14 users in one month, indicating a strong interest but not yet a majority demand.  
+Overall value: 4 – Displaying prices and cheapest restock locations would significantly enhance the app’s utility for users managing their inventory and budgeting.  
+Build effort: High – Integrating price tracking and sourcing data requires complex backend work, partnerships, or third-party APIs, which could be resource-intensive.
 ~~~
 
-**Prompt Lab review:** overall score 82.25/100
+**Prompt Lab review:** overall score 83.25/100
 
 ~~~text
 Rubric Scores
-* Clarity: 85/100 - The prompt is mostly clear about the role, context, and expected output, but could specify the scoring scale explicitly and clarify "overall value."
-* Constraints: 80/100 - The prompt sets clear constraints on output format and content but could better define "build effort" categories and reasoning length.
-* Structure: 80/100 - The prompt is logically structured but could benefit from bullet points or numbered lists for clarity and easier parsing.
-* Verifiability: 75/100 - The prompt includes user request count as a data point but lacks guidance on how to verify or justify scores beyond that.
-* Hallucination Risk: 90/100 - The prompt minimizes hallucination risk by focusing on scoring a given feature request with provided data, but some assumptions about build effort could lead to speculation.
-Overall score: 82.25/100
+* Clarity: 85/100 - The prompt is mostly clear about the role, action, context, and expected output, but could specify the scoring scale explicitly for build effort.
+* Constraints: 80/100 - The prompt sets clear constraints on output format and content but could better define the scoring criteria for each dimension.
+* Structure: 85/100 - The prompt is well-structured with distinct sections, though the expected output could be formatted more explicitly for easier parsing.
+* Verifiability: 75/100 - The prompt includes user request count as a data point, but lacks additional data or criteria to verify the scores objectively.
+* Hallucination Risk: 90/100 - The prompt limits the assistant to scoring based on given data, reducing hallucination risk, but some assumptions about build effort complexity remain subjective.
+Overall score: 83.25/100
 Top Improvements
-* Explicitly define scoring scales and criteria for each score to improve clarity and verifiability.
-* Provide clearer definitions or examples for build effort categories to reduce ambiguity.
-* Use bullet points or numbered lists to improve prompt structure and readability.
+* Explicitly define the scoring scales and criteria for user demand, overall value, and build effort.
+* Provide a more structured output format, such as bullet points or labeled fields, to improve clarity and parsing.
+* Include additional context or data points to support verifiability and reduce subjective assumptions.
 ~~~
 
 ### Prompt Lab — V3 (final)
@@ -182,27 +182,25 @@ Top Improvements
 **Recorded response (GPT-4.1 mini)**
 
 ~~~text
-User demand: 4 — Requested by 14 users this month, indicating strong interest and clear demand for enhanced Restock functionality.
-
-Fit with product principles: 1 — This feature conflicts directly with Hauly’s principle of avoiding prices and shopping features, as it involves showing prices and suggesting purchase locations.
-
-Build effort: Medium — Integrating price data and sourcing cheapest restock locations would require moderate backend work and possibly third-party data integrations.
+User demand: 4 — Requested by 14 users this month, indicating solid interest but not overwhelming demand.  
+Fit with product principles: 1 — This feature directly conflicts with the principle of no prices or shopping features, except free-text prices on Rehome posts visible only to authors.  
+Build effort: High — Integrating real-time price tracking and comparison across retailers would require substantial backend development and ongoing maintenance.
 ~~~
 
 **Prompt Lab review:** overall score 85.25/100
 
 ~~~text
 Rubric Scores
-* Clarity: 85/100 - The prompt is mostly clear about the role, context, and expected output, but could benefit from slightly more explicit instructions on formatting and reasoning detail.
-* Constraints: 80/100 - The prompt includes relevant constraints (product principles) and output format, but could specify the scoring scale more explicitly and clarify the reasoning length.
-* Structure: 80/100 - The prompt is logically structured with role, action, context, feature request, and expected output, but could separate instructions more distinctly for easier parsing.
-* Verifiability: 90/100 - The prompt provides concrete data (14 users requesting) and clear product principles, enabling verifiable scoring and conflict detection.
-* Hallucination Risk: 95/100 - The prompt minimizes hallucination risk by grounding the request in specific product principles and user data, reducing ambiguity.
+* Clarity: 85/100 - The prompt is mostly clear about the role, context, and expected output, but some phrasing could be simplified for easier understanding.
+* Constraints: 90/100 - The prompt includes specific constraints about product principles and output format, though it could emphasize the importance of strictly adhering to these constraints.
+* Structure: 80/100 - The prompt is logically structured but could benefit from clearer separation of sections and bullet points for readability.
+* Verifiability: 85/100 - The prompt provides concrete data (14 users requesting) and clear product principles, enabling verifiable scoring, but could specify how to handle ambiguous cases.
+* Hallucination Risk: 90/100 - The prompt limits hallucination risk by grounding the request in explicit product principles and user data, though some ambiguity in "build effort" might lead to subjective answers.
 Overall score: 85.25/100
 Top Improvements
-* Explicitly define the scoring scale (e.g., 1 = low, 5 = high) for user demand and fit with product principles.
-* Clarify the expected length and detail of the reasoning sentences.
-* Separate the instructions for scoring and conflict flagging more clearly to avoid confusion.
+* Simplify and clarify the language to improve immediate comprehension.
+* Use bullet points or numbered lists to separate context, constraints, and expected output clearly.
+* Explicitly instruct the assistant to flag conflicts and avoid assumptions beyond the given data.
 ~~~
 
-**Possible next version:** the V3 review suggested defining the scoring scale (for example, 1 = low, 5 = high). The two models gave different demand scores for the same request, so a defined scale could make scores more consistent. This was not tested, so it is not part of the final prompt.
+**Possible next version:** the reviews suggested defining the scoring scales (for example, 1 = low, 5 = high). Build effort was scored "Medium" in one run and "High" in another, so a defined scale could make scores more consistent. This was not tested, so it is not part of the final prompt.

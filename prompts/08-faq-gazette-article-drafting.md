@@ -93,3 +93,76 @@ Expected output: FAQ mode — a question written the way a user would search it,
 ~~~text
 needs_clarification
 ~~~
+
+## Prompt Lab check (GPT-4.1 mini)
+
+To check the results weren't specific to one AI model, the first and final versions were re-run in La Trobe Prompt Lab using GPT-4.1 mini, with exactly the same prompt text. Prompt Lab's prompt review scores the prompt itself out of 100.
+
+**What GPT-4.1 mini did — the final version failed on this model:**
+
+| Version | Result | Compared with Claude Sonnet 5 |
+| --- | --- | --- |
+| V1 | Silently chose FAQ mode and wrote a draft; its tip mentioned "items still in transit", which is not in the source material | Same problem, plus an invented tip |
+| V2 (final) | **Ignored the rule:** with the mode blank, it still wrote an FAQ draft instead of replying only `needs_clarification`; its tip ("Make sure you select the correct product…") was also not from the source | **Different** — Claude Sonnet 5 replied only `needs_clarification` |
+
+- **Prompt Lab review:** V1 scored 82.25/100 and did not point out that the mode was missing. V2 scored 83.5/100 and suggested making the handling of a missing mode more explicit — which matches what went wrong.
+
+**What this adds:** this is the clearest example in the library of a prompt that works on one model and fails on another. A possible next version would put the mode check first, as its own step, before any drafting instructions. That version was not tested, so it is not part of the final prompt. Until then, Holly's review before publishing is the safeguard.
+
+### Prompt Lab — V1
+
+**Recorded response (GPT-4.1 mini)**
+
+~~~text
+**FAQ**
+
+**Q: How do I move a finished product from Haul to Restock in Hauly?**
+
+A: In Haul, simply select the finished product you want to move. Then tap the button labeled “Move to restock.” This transfers the product from your Haul list to Restock, keeping your inventory organized.
+
+**Tip:** Use this feature to keep a clear view of what’s ready to be restocked without mixing it with items still in transit.
+~~~
+
+**Prompt Lab review:** overall score 82.25/100
+
+~~~text
+Rubric Scores
+* Clarity: 85/100 - The prompt is mostly clear but could benefit from more explicit instructions on how to handle the GAZETTE mode and clearer separation of modes.
+* Constraints: 80/100 - The prompt sets good constraints on tone, length, and content but could specify formatting requirements more explicitly.
+* Structure: 75/100 - The prompt is somewhat structured but mixes multiple instructions in a single paragraph, making it harder to parse quickly.
+* Verifiability: 90/100 - The prompt references specific source material and expected outputs, which supports verifiability.
+* Hallucination Risk: 85/100 - The prompt limits content to provided source material, reducing hallucination risk, but the GAZETTE mode instructions are vague and could lead to unsupported content.
+Overall score: 82.25/100
+Top Improvements
+* Separate instructions for FAQ and GAZETTE modes more clearly to avoid confusion.
+* Explicitly state formatting and length constraints for both modes.
+* Clarify the source material and content boundaries for GAZETTE mode to reduce hallucination risk.
+~~~
+
+### Prompt Lab — V2 (final)
+
+**Recorded response (GPT-4.1 mini)**
+
+~~~text
+**Q: How do I move a finished product from my Haul to Restock in Hauly?**
+
+A: To move a finished product from your Haul to Restock, open your Haul, select the product you want to move, then tap the "Move to restock" button. This will transfer the item to your Restock list.
+
+**Tip:** Make sure you select the correct product before tapping "Move to restock" to avoid any mix-ups.
+~~~
+
+**Prompt Lab review:** overall score 83.5/100
+
+~~~text
+Rubric Scores
+* Clarity: 85/100 - The prompt clearly defines roles, modes, and expected outputs, but the mode input handling could be more explicit.
+* Constraints: 80/100 - The prompt sets good constraints on language style, word limits, and output format, though the handling of missing or invalid modes could be more detailed.
+* Structure: 75/100 - The prompt is somewhat dense and could benefit from clearer separation of instructions and examples for easier parsing.
+* Verifiability: 90/100 - The prompt references specific source material and limits content to that, which supports verifiability.
+* Hallucination Risk: 90/100 - The prompt restricts content to provided source material and specific modes, reducing hallucination risk.
+Overall score: 83.5/100
+Top Improvements
+* Clarify the handling of the mode input, explicitly stating what valid modes are and how to respond if missing or invalid.
+* Separate instructions, examples, and expected output formats more clearly for easier understanding.
+* Add explicit instructions on how to handle the "related tip" in FAQ mode, especially if the source material does not contain one.
+~~~

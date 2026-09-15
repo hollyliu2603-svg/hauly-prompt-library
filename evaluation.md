@@ -16,7 +16,7 @@ Across the ten prompts, the most common problem in first versions was the AI **a
 
 ## Cross-model check (La Trobe Prompt Lab, GPT-4.1 mini)
 
-To check the results weren't specific to one model, the first and/or final versions of Prompts 1–7 were re-run in La Trobe Prompt Lab using GPT-4.1 mini, with the same prompt text. Most runs were also scored by Prompt Lab's prompt review, which rates the prompt out of 100.
+To check the results weren't specific to one model, the first and/or final versions of all ten prompts were re-run in La Trobe Prompt Lab using GPT-4.1 mini, with the same prompt text. Most runs were also scored by Prompt Lab's prompt review, which rates the prompt out of 100.
 
 | Prompt | Held on GPT-4.1 mini | Differed on GPT-4.1 mini |
 | --- | --- | --- |
@@ -24,11 +24,14 @@ To check the results weren't specific to one model, the first and/or final versi
 | 2 (V1, V3, V4) | V1 still wrote as a team; V3 invented nothing | V4 hinted at "how to recover your data" — not an approved fact |
 | 3 (V1, V2) | V1 reassured and missed Hauly pairings; V2 exactly matched Hauly's list | — |
 | 4 (V1, V2) | V1 invented a technical cause; V2 gave none | V2 marked fewer assumed steps and skipped "not provided" |
-| 5 (V1, V3) | V1 scored value 4/5; V3 scored fit 1/5 and flagged the conflict | Different demand and build-effort scores |
+| 5 (V1, V3) | V1 scored value 4/5; V3 scored fit 1/5 and flagged the conflict (same in two runs each) | Build-effort score changed between runs |
 | 6 (V2, V3) | — | Used "emerging"/"established" on one-video evidence, marked ice rolling "suitable for founder review", and stated many outside facts |
 | 7 (V1, V4) | V1 said "remove"; V4 flagged both rules and required human review | V1 missed the real name; V4 chose `flag_for_review` instead of `recommend_remove` |
+| 8 (V1, V2) | V1 guessed the mode | **V2 failed:** drafted an FAQ instead of replying `needs_clarification`; both added tips not in the source |
+| 9 (V1, V2) | Both met every rule; the Role made no visible difference | — |
+| 10 (V1, V2) | V2 invented no numbers and marked missing sections | **V1 invented last week's bug count** (the problem V2 fixes); V2 recommended three actions instead of one |
 
-**What the reviews showed:** Prompt Lab's review scored every prompt between 72 and 91.5 out of 100. It did not notice that Prompt 5 V1 lacked Hauly's principles, or that Prompt 7 V1's "remove" implied automatic deletion, and it scored Prompt 6 at over 90 even though the outputs broke the prompt's rules. Two suggestions asked for things the prompts already contained. The review is useful for checking how clearly a prompt is written, but it cannot replace testing the output against the business's real rules.
+**What the reviews showed:** Prompt Lab's review scored every prompt between 72 and 91.5 out of 100. It did not notice that Prompt 8 V1's mode was missing, that Prompt 5 V1 lacked Hauly's principles, or that Prompt 7 V1's "remove" implied automatic deletion, and it scored Prompt 6 at over 90 even though the outputs broke the prompt's rules. Several suggestions asked for things the prompts already contained. The review is useful for checking how clearly a prompt is written, but it cannot replace testing the output against the business's real rules.
 
 The two comparisons below show the process in the most detail.
 
