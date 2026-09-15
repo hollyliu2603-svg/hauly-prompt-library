@@ -1,0 +1,7 @@
+# Presentation slides and exported files stay out of the repo
+*.pptx
+*.ppt
+*.key
+*.pdf
+slides/
+.DS_Store
