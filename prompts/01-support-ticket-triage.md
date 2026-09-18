@@ -16,7 +16,7 @@ Role framing with role limits; fixed answer options (constraints); a review poli
 
 ## Automation potential
 
-**High** for the first sort. Because the output is structured JSON with fixed fields, it can be passed straight into Prompt 2 (reply drafting) or a tracking sheet — this chaining is what raises the automation potential. The `needs_human_review` flag routes payment, safety, lost-data and multi-issue messages to Holly.
+**High** — the first sort could be used with limited manual editing. Because the output is structured JSON with fixed fields, it can be passed straight into Prompt 2 (reply drafting) or a tracking sheet — this chaining is what raises the automation potential. The `needs_human_review` flag routes payment, safety, lost-data and multi-issue messages to Holly.
 
 ## Risks and limitations
 

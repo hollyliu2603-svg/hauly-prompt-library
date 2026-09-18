@@ -16,7 +16,7 @@ Role framing; a mode switch so one prompt handles two jobs; a "stop and ask" rul
 
 ## Automation potential
 
-**High** for drafting. Every FAQ and article is checked and approved by Holly before publishing.
+**High** — drafts could be used with limited manual editing. Every FAQ and article is checked and approved by Holly before publishing.
 
 ## Risks and limitations
 

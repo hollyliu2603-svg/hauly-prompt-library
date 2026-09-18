@@ -15,7 +15,7 @@ A library of ten tested prompts, one for each repeating job (see the [workflow t
 - says clearly what the AI must **not** do (guess causes, invent facts, remove posts, publish content)
 - connects to the next step: structured outputs (for example Prompt 1's triage record) can be passed straight into another prompt (Prompt 2), which is where most of the automation potential comes from
 
-The prompts **support** Holly rather than replace judgement. As Module 1, Topic 3 puts it, workflow automation "is not about replacing humans but about augmenting human performance".
+Holly still checks the output before acting on it. As Module 1, Topic 3 puts it, workflow automation "is not about replacing humans but about augmenting human performance".
 
 ## 3. How would it be put in place?
 

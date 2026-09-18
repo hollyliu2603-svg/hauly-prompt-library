@@ -16,7 +16,7 @@ Role framing; fixed ticket sections (structured output); a rule against guessing
 
 ## Automation potential
 
-**High.** This can run on every bug report, because a person still reads the ticket before any work starts.
+**High** — tickets could be used with limited manual editing. This can run on every bug report, because a person still reads the ticket before any work starts.
 
 ## Risks and limitations
 

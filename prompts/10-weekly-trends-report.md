@@ -16,7 +16,7 @@ Role framing; a "not provided this week" rule for missing data; only calculating
 
 ## Automation potential
 
-**High** as a decision-support tool. It brings together outputs from Prompts 1, 4, 5, 6 and 7; decisions stay with Holly.
+**High** — the summary could be used with limited manual editing, as decision support. It brings together outputs from Prompts 1, 4, 5, 6 and 7; decisions stay with Holly.
 
 ## Risks and limitations
 

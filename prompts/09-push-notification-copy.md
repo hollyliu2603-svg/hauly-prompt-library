@@ -16,7 +16,7 @@ Role framing; character and word limits, and a ban on pushy sales language (cons
 
 ## Automation potential
 
-**High.** A low-risk, frequent task — a quick tone check before sending is enough.
+**High** — the copy could be used with limited manual editing. A low-risk, frequent task — a quick tone check before sending is enough.
 
 ## Risks and limitations
 
@@ -30,7 +30,7 @@ Role framing; character and word limits, and a ban on pushy sales language (cons
 | V1 | No Role (found by checking all ten prompts against RACE) | Push "Scan ingredients, get plain English" (35 characters); banner 17 words; met every rule |
 | V2 (final) | Adds the Role | Push "Scan a label for a plain-English report" (39 characters); banner 18 words; met every rule |
 
-**Discussion:** Both versions used the same announcement. Adding the Role made no visible difference in this test; the change keeps the prompt consistent with RACE rather than improving the copy. **Naming note:** the sample announcement says "Ingredient Report"; on the app screen the feature is titled "Label report", so a real announcement should use that name.
+**Discussion:** Both versions used the same announcement. Adding the Role made no visible difference in this test; the change keeps the prompt consistent with RACE; it did not improve the copy. **Naming note:** the sample announcement says "Ingredient Report"; on the app screen the feature is titled "Label report", so a real announcement should use that name.
 
 ## Final prompt — reusable template (V2)
 
