@@ -45,7 +45,7 @@ When a prompt is used, facts about a specific case (for example, whether a fix h
 
 ## 4. How every prompt is built
 
-Every prompt uses the **RACE** structure from Module 1, Topic 3, Figure 1.9 (La Trobe University, 2026):
+All ten final prompts use the **RACE** structure from Module 1, Topic 3, Figure 1.9 (La Trobe University, 2026). Testing showed that Prompt 9's first version was missing its Role; this was added in the final version. In Prompt 8's final version, the Action is split into two numbered steps so the mode check comes first:
 
 - **Role** — who the AI acts as
 - **Action** — what it must do
