@@ -14,6 +14,51 @@ All tests were run in September 2026 using Claude Sonnet 5, with no other instru
 
 Across the ten prompts, the most common problem in first versions was the AI **adding information that wasn't given** — an invented team (Prompt 2), an invented bug cause (Prompt 4), invented app sections (Prompt 6), and guesses presented as facts (Prompt 10). This matches research showing that language models "can generate outputs that are untruthful", and that even a model trained to follow instructions "still makes simple mistakes" (Ouyang et al., 2022, p. 1). The most effective fix was a direct rule telling the AI to use only the facts given, and what to do instead when something is missing.
 
+## Iteration evidence at a glance
+
+Each row follows the same cycle: basic prompt → tested output → weakness found → revised prompt → improved output. Quotes are taken word for word from the recorded responses (Claude Sonnet 5); the full prompt text and response for every version are on each prompt's page. Prompts 2 and 6 are covered in more detail in the two examples further down.
+
+### Prompt 1 — Support Ticket Triage (feeds Prompt 2)
+
+| Version | What changed | Output (quoted) | Weakness found |
+| --- | --- | --- | --- |
+| V1 | One line: "Sort this message." | "## 1. Billing Issue 💳 … **Priority:** High (financial/urgent)" | Made-up labels in a formatted list — nothing a tracker or Prompt 2 could read |
+| V2 | RACE structure, fixed category/urgency/tab options, JSON output | `{"category": "bug", "urgency": "high", "affected_tab": "Restock", …}` | One label for a message containing three issues (a double charge, a broken tab and a feature request) |
+| V3 | Split into separate issues; payment = `account`; `needs_human_review` flag | Three issues: `account`, `bug`, `feature_request`, with `"needs_human_review": true` | Data types not fixed, so the shape could change between runs |
+| V4 (final) | Role limits, a written review policy, exact data types, `review_reasons` as a list | Same three issues; `needs_human_review` is true/false and `review_reasons` is a list | Still wrapped the JSON in code-formatting marks |
+
+**Automation and human control:** because V4's output has fixed fields and types, it is passed straight into Prompt 2 as its input — this chaining is where the automation potential comes from. The `needs_human_review` flag keeps payment, safety, lost-data and multi-issue messages with Holly.
+
+### Prompt 7 — Circle Community Moderation
+
+| Version | What changed | Output (quoted) | Weakness found |
+| --- | --- | --- | --- |
+| V1 | RACE structure and Hauly's Circle rules; actions allow / flag_for_review / remove | `{"action": "remove", …}` | "remove" reads as an instruction to delete automatically |
+| V2 | Action renamed `recommend_remove`; a human decides; a consistency self-check | `{"action": "recommend_remove", …}` | Rules broken given as one text field; no explicit review flag |
+| V3 | Exact data types; `rules_broken` as a list; `human_review_required` flag | `"rules_broken": [ … ], … "human_review_required": true` | Names rule said "@usernames only", which didn't match the app |
+| V4 (final) | Names rule corrected to "personal details of other people" | Same decision; still `"human_review_required": true` | The self-check has not yet been shown to change a decision |
+
+**Automation and human control:** the structured output can feed a moderation queue, but removal is never automatic — every action except "allow" goes to Holly.
+
+### Prompt 10 — Weekly Operations Report
+
+| Version | What changed | Output (quoted) | Weakness found |
+| --- | --- | --- | --- |
+| V1 | Basic RACE prompt asking for "percentage change vs last week" for every section | The bug was "likely inflating the \"how_to\" support volume" and "the single largest driver of this week's support spike"; on GPT-4.1 mini it invented a figure: "up from 10 last week (assuming last week bugs were 10 based on support split)" | Guesses and made-up numbers presented as facts |
+| V2 (final) | "Not provided this week" rule; percentages only when both numbers are given; separate given numbers, observations and guesses | "No comparison available"; "Not provided this week"; the bug link labelled "an **inference**, not a confirmed causal link" | On GPT-4.1 mini it still recommended three actions instead of one |
+
+**Automation and human control:** the report brings together outputs from Prompts 1, 4, 5, 6 and 7 automatically, but it is decision support only — Holly decides what to act on.
+
+### Prompt 8 — FAQ and Gazette Drafting (fixed after cross-model testing)
+
+| Version | What changed | Output with the mode left blank (quoted) | Weakness found |
+| --- | --- | --- | --- |
+| V1 | RACE structure with FAQ/GAZETTE modes, no rule for a missing mode | A full FAQ draft, starting "# FAQ Draft" | Guessed the mode without saying so |
+| V2 | "Reply only with `needs_clarification`" if the mode is missing | Claude Sonnet 5: `needs_clarification`; GPT-4.1 mini: a full FAQ draft | Rule ignored on GPT-4.1 mini |
+| V3 (final) | The mode check moved to its own first step | `needs_clarification` on both models; with `Mode: FAQ` it still drafted normally | — |
+
+**Automation and human control:** every FAQ and article is a draft that Holly approves before publishing.
+
 ## Cross-model check (La Trobe Prompt Lab, GPT-4.1 mini)
 
 To check the results weren't specific to one model, the first and/or final versions of all ten prompts were re-run in La Trobe Prompt Lab using GPT-4.1 mini, with the same prompt text. Most runs were also scored by Prompt Lab's prompt review, which rates the prompt out of 100.

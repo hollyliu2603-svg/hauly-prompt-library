@@ -75,7 +75,7 @@ Module 1, Topic 3 recommends treating each prompt "as a hypothesis to be validat
 
 **Cross-model check in La Trobe Prompt Lab.** All ten prompts were also re-run in Prompt Lab using GPT-4.1 mini, with the same prompt text, and most were scored by Prompt Lab's prompt review. The main findings held: first versions invented causes (Prompt 4), ignored Hauly's principles (Prompt 5) and implied automatic removal (Prompt 7), while final versions fixed them; Prompt 10's first version even invented last week's bug count, the exact problem its final version prevents. But GPT-4.1 mini followed some rules less closely — Prompt 8's second version wrote a draft instead of asking for the missing mode (a third version fixed this on both models), Prompt 2's final version hinted at data recovery, and Prompt 6 added outside facts and marked the ice-rolling trend "suitable for founder review". Prompt Lab's review gave high scores (72–91.5/100) even to prompts whose outputs broke their own rules, so reviews were treated as advice, not proof.
 
-Each prompt's page shows every version's full prompt text and recorded response, plus the Prompt Lab results. The [Evaluation](evaluation.md) compares the two most detailed examples.
+Each prompt's page shows every version's full prompt text and recorded response, plus the Prompt Lab results. The [Evaluation](evaluation.md) starts with an "iteration evidence at a glance" section showing, for Prompts 1, 7, 8 and 10, what changed in each version and a quoted before-and-after output, followed by detailed comparisons for Prompts 2 and 6.
 
 ## 6. Report contents
 
