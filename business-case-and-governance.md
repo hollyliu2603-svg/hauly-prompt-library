@@ -50,6 +50,11 @@ Holly still checks the output before acting on it. As Module 1, Topic 3 puts it,
 
 **Evidence from testing so far:** in nine of the ten prompts, the final version followed its rules more closely than the first version (in Prompt 9 there was no visible difference) — for example, Prompt 2's reply fell from 231 words with an invented team to under 80 words with no invented details, and Prompt 5 correctly flagged a request that conflicts with Hauly's no-prices principle, which the first version had scored 4/5 for value. These are single test runs, not measured business results.
 
+**Operational and strategic impact:**
+
+- **Operational:** less time spent on repetitive sorting and drafting, and consistent labels and formats that can be counted and tracked (the measures above).
+- **Strategic:** the library protects Hauly's "organising, not shopping" position — Prompt 5 flagged a price-comparison request as a direct conflict instead of recommending it. It also protects user trust in health and community content, through Prompts 3, 6 and 7, and frees founder time for improving the app as the number of users grows.
+
 ## 5. Risks and safeguards
 
 Module 1, Topic 3 identifies three main risks of automating work with AI — hallucinations, bias and over-reliance — and three governance tools: audits, escalation and training. It also asks business cases to acknowledge data leakage.
